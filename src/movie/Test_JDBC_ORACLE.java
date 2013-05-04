@@ -1,4 +1,4 @@
-package Movie;
+package movie;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
