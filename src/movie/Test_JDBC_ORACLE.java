@@ -45,7 +45,14 @@ public class Test_JDBC_ORACLE {
 				String officialSite = rs.getString(6);
 				String photo = rs.getString(7);
 				
-				System.out.println(title+release_year+genre+officialSite+photo+rate+description);
+				System.out.println("영화명 : "+title);
+				System.out.println("개봉시기 : "+release_year);
+				System.out.println("장르 : " + genre);
+				System.out.println("시놉시스 : " + description);
+				System.out.println("평점 : "+ rate);
+				System.out.println("공식홈페이지 : "+ officialSite);
+				System.out.println("사진"+photo);
+				System.out.println();
 			}
 			
 			stmt.close();
