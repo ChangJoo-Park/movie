@@ -8,7 +8,7 @@ package movie;
  * officialSite : String
  * photo 		: String
  */
-public class Movie {
+public class MovieEntity {
 	private String title;
 	private String description;
 	private int release_year;
