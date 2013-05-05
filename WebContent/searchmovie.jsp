@@ -4,27 +4,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"/>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
 <title>Insert title here</title>
 </head>
 <body>
 <%@ page import="java.sql.*" %>
+<% request.setCharacterEncoding("euc-kr"); %>
 <% 
 Connection conn = null;
-Statement stmt = null;
+PreparedStatement pstmt = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
 String dbURL = "jdbc:oracle:thin:@oracle.hotsun0428.cafe24.com:1521:orcl";
+String sql = "select * from MOVIE_TEST where title like ?";
+String movietitle = "%" + request.getParameter("movietitle") + "%";
+int rowCount = 0 ;
 
 try{
 	Class.forName(driverName);
 	conn = DriverManager.getConnection(dbURL,"hotsun0428","rudah0428");
-	stmt = conn.createStatement();
-	ResultSet result = stmt.executeQuery("select * from MOVIE_TEST;"); 
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1,movietitle);
+	ResultSet result = pstmt.executeQuery();
 %>
-<table class="table table-hover">
-<thead>
+<table>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
@@ -34,11 +35,11 @@ try{
 	<th><b>공식홈페이지</b></th>
 	<th><b>사진</b></th>
 </tr>
-</thead>
+
 <%
 	while(result.next()){
+		rowCount++;
 %>
-<tbody>
 <tr>
 	<td><%=result.getString(1) %></td>
 	<td><%=result.getString(2) %></td>
@@ -48,9 +49,16 @@ try{
 	<td><%=result.getString(6) %></td>
 	<td><%=result.getString(7) %></td>
 </tr>
-</tbody>
 <%
 	}
+if(rowCount == 0)
+{
+	out.println("조회된 결과가 없습니다.");
+}
+else
+{
+	out.println("조회된 결과가"+rowCount+"건 입니다.");
+}
 	result.close();
 }catch(Exception e){
 	out.println("데이터베이스 접속에 문제가 있습니다.");
@@ -58,7 +66,7 @@ try{
 	e.printStackTrace();
 }
 finally{
-	if(stmt != null) stmt.close();
+	if(pstmt != null) pstmt.close();
 	if(conn != null) conn.close();
 }
 %>
