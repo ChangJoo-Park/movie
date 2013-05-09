@@ -15,6 +15,7 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <table>
+<thead>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
@@ -24,9 +25,11 @@ if(counter > 0 ){
 	<th><b>공식홈페이지</b></th>
 	<th><b>사진</b></th>
 </tr>
+</thead>
 <%
 	for(MovieEntity movie : list){
 %>
+<tbody>
 <tr>
 	<td><%= movie.getTitle() %></td>
 	<td><%= movie.getDescription() %></td>
@@ -36,6 +39,7 @@ if(counter > 0 ){
 	<td><%= movie.getOfficialSite() %></td>
 	<td><%= movie.getPhoto() %></td>
 </tr>
+</tbody>
 <%
 	}
 }

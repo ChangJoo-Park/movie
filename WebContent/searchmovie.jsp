@@ -26,16 +26,18 @@ try{
 	ResultSet result = pstmt.executeQuery();
 %>
 <table>
+<thead>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
-	<th><b>개봉년도</b></th>
 	<th><b>장르</b></th>
+	<th><b>개봉년도</b></th>
 	<th><b>평점</b></th>
 	<th><b>공식홈페이지</b></th>
 	<th><b>사진</b></th>
 </tr>
-
+</thead>
+<tbody>
 <%
 	while(result.next()){
 		rowCount++;
@@ -43,12 +45,13 @@ try{
 <tr>
 	<td><%=result.getString(1) %></td>
 	<td><%=result.getString(2) %></td>
-	<td><%=result.getInt(3) %></td>
-	<td><%=result.getString(4) %></td>
+	<td><%=result.getString(3) %></td>
+	<td><%=result.getInt(4) %></td>
 	<td><%=result.getInt(5) %></td>
 	<td><%=result.getString(6) %></td>
 	<td><%=result.getString(7) %></td>
 </tr>
+</tbody>
 <%
 	}
 if(rowCount == 0)
