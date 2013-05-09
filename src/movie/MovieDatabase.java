@@ -85,4 +85,92 @@ public class MovieDatabase {
 		// 완성된 ArrayList 객체를 반환
 		return list;
 	}
+	public MovieEntity getMovie(String title){
+		connect();
+		String SQL = "select * from MOVIE_TEST where TITLE = ?";
+		MovieEntity movie = new MovieEntity();
+		try{
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, title);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			movie.setTitle(rs.getString("TITLE"));
+			movie.setDescription(rs.getString("DESCRIPTION"));
+			movie.setGenre(rs.getString("GENRE"));
+			movie.setRelease_year(rs.getInt("RELEASE_YEAR"));
+			movie.setRate(rs.getInt("RATE"));
+			movie.setOfficialSite(rs.getString("OFFICIALSITE"));
+			movie.setPhoto(rs.getString("PHOTO"));
+			rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			disconnect();
+		}
+		return movie;
+	}
+	public boolean insertDB(MovieEntity movie){
+		boolean success = false;
+		connect();
+		String SQL = "insert into MOVIE_TEST values(?,?,?,?,?,?,?)";
+		try{
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1,movie.getTitle());
+			pstmt.setString(2,movie.getDescription());
+			pstmt.setString(3,movie.getGenre());
+			pstmt.setInt(4, movie.getRelease_year());
+			pstmt.setInt(5, movie.getRate());
+			pstmt.setString(6,movie.getOfficialSite());
+			pstmt.setString(7,movie.getPhoto());
+			pstmt.executeUpdate();
+			success = true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return success;
+		}finally{
+			disconnect();
+		}
+		return success;
+	}
+	public boolean updateDB(MovieEntity movie){
+		boolean success = false;
+		connect();
+		String SQL = "update MOVIE_TEST set TITLE=?, DESCRIPTION=?,GENRE=?, RELEASE_YEAR=?, RATE=?, OFFICIALSITE=?, PHOTO=? where TITLE=? ";
+		try{
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1,movie.getTitle());
+			pstmt.setString(2,movie.getDescription());
+			pstmt.setString(3,movie.getGenre());
+			pstmt.setInt(4, movie.getRelease_year());
+			pstmt.setInt(5, movie.getRate());
+			pstmt.setString(6,movie.getOfficialSite());
+			pstmt.setString(7,movie.getPhoto());
+			int rowUdt = pstmt.executeUpdate(); 
+			if(rowUdt == 1 ) success = true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return success;
+		}finally{
+			disconnect();
+		}
+		return success;
+	}
+	public boolean deleteDB(String title){
+		boolean success = false;
+		connect();
+		String SQL = "delete from MOVIE_TEST where TITLE = ?";
+		try{
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1,title);
+			pstmt.executeUpdate();
+			success = true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return success;
+		}finally{
+			disconnect();
+		}
+		return success;
+	}
+	
 }

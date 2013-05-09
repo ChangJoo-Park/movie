@@ -18,8 +18,8 @@ if(counter > 0 ){
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
-	<th><b>개봉년도</b></th>
 	<th><b>장르</b></th>
+	<th><b>개봉년도</b></th>
 	<th><b>평점</b></th>
 	<th><b>공식홈페이지</b></th>
 	<th><b>사진</b></th>
