@@ -66,6 +66,7 @@ public class MovieDatabase {
 				MovieEntity movie = new MovieEntity();
 				
 				// 한 행의 영화 정보를 자바빈즈 객체에 저장 get~ 안의 문자열은 칼럼명과 동일하게 해야한다.
+				movie.setId(rs.getInt("MOVIE_ID"));
 				movie.setTitle(rs.getString("TITLE"));
 				movie.setYear(rs.getInt("YEAR"));
 				movie.setDescription(rs.getString("DESCRIPTION"));
@@ -86,15 +87,16 @@ public class MovieDatabase {
 		// 완성된 ArrayList 객체를 반환
 		return list;
 	}
-	public MovieEntity getMovie(String title){
+	public MovieEntity getMovie(int id){
 		connect();
-		String SQL = "select * from MOVIE where TITLE = ?";
+		String SQL = "select * from MOVIE where MOVIE_ID = ?";
 		MovieEntity movie = new MovieEntity();
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1, title);
+			pstmt.setInt(1,id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
+			movie.setId(rs.getInt("MOVIE_ID"));
 			movie.setTitle(rs.getString("TITLE"));
 			movie.setYear(rs.getInt("YEAR"));
 			movie.setDescription(rs.getString("DESCRIPTION"));
@@ -114,7 +116,7 @@ public class MovieDatabase {
 	public boolean insertDB(MovieEntity movie){
 		boolean success = false;
 		connect();
-		String SQL = "insert into MOVIE values(?,?,?,?,?,?,?,?)";
+		String SQL = "insert into MOVIE values(MOVIE_ID.nextval,?,?,?,?,?,?,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,movie.getTitle());
@@ -138,7 +140,7 @@ public class MovieDatabase {
 	public boolean updateDB(MovieEntity movie){
 		boolean success = false;
 		connect();
-		String SQL = "update MOVIE set TITLE=?, DESCRIPTION=?,GENRE=?, RELEASE_YEAR=?, RATE=?, OFFICIALSITE=?, PHOTO=? where TITLE=? ";
+		String SQL = "update MOVIE SET (TITLE, YEAR, DESCRIPTION, GENRE, OFFICIALSITE, PHOTO, RATE, PLAY_TIME) = (?,?,?,?,?,?,?,?) WHERE MOVIE_ID=? ";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,movie.getTitle());
@@ -149,6 +151,7 @@ public class MovieDatabase {
 			pstmt.setString(6,movie.getPhoto());
 			pstmt.setInt(7, movie.getRate());
 			pstmt.setInt(8, movie.getPlay_time());
+			pstmt.setInt(9, movie.getId());
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
 		}catch(Exception e){
@@ -159,13 +162,13 @@ public class MovieDatabase {
 		}
 		return success;
 	}
-	public boolean deleteDB(String title){
+	public boolean deleteDB(int id){
 		boolean success = false;
 		connect();
-		String SQL = "delete from MOVIE where TITLE = ?";
+		String SQL = "delete from MOVIE where MOVIE_ID = ?";
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1,title);
+			pstmt.setInt(1,id);
 			pstmt.executeUpdate();
 			success = true;
 		}catch(Exception e){

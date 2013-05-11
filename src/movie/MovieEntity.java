@@ -1,5 +1,6 @@
 package movie;
 /**
+ * id			: int
  * title 		: String
  * year 		: int
  * description 	: String
@@ -10,6 +11,7 @@ package movie;
  * play_time	: int
  */
 public class MovieEntity {
+	private int	id;
 	private String	title;
 	private int	year;
 	private String	description;
@@ -18,6 +20,12 @@ public class MovieEntity {
 	private String	photo;
 	private int	rate;
 	private	 int	play_time;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}

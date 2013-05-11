@@ -9,6 +9,8 @@
 <h2>자바 빈즈 MovieDatabase를 이용한 테이블 MOVIE 조회</h2>
 <jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
 <%
+request.setCharacterEncoding("euc-kr");
+
 ArrayList<MovieEntity>list = moviedb.getMovieList();
 int counter = list.size();
 if(counter > 0 ){
@@ -30,9 +32,8 @@ if(counter > 0 ){
 <%
 	for(MovieEntity movie : list){
 %>
-<tbody>
 <tr>
-	<td><%= movie.getTitle() %></td>
+	<td><%= movie.getTitle() %><a href="editmovie.jsp?id=<%=movie.getId()%>">수정</a></td>
 	<td><%= movie.getDescription() %></td>
 	<td><%= movie.getGenre() %></td>
 	<td><%= movie.getYear() %></td>
@@ -41,7 +42,6 @@ if(counter > 0 ){
 	<td><img src="<%= movie.getPhoto() %>"/></td>
 	<td><%= movie.getPlay_time() %></td>
 </tr>
-</tbody>
 </table>
 <%
 	}

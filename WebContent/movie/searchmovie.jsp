@@ -14,7 +14,7 @@ Connection conn = null;
 PreparedStatement pstmt = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
 String dbURL = "jdbc:oracle:thin:@oracle.hotsun0428.cafe24.com:1521:orcl";
-String sql = "select * from MOVIE_TEST where title like ?";
+String sql = "select * from MOVIE where title like ?";
 String movietitle = "%" + request.getParameter("movietitle") + "%";
 int rowCount = 0 ;
 
