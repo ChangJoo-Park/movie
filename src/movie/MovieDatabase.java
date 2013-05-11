@@ -140,7 +140,7 @@ public class MovieDatabase {
 	public boolean updateDB(MovieEntity movie){
 		boolean success = false;
 		connect();
-		String SQL = "update MOVIE SET (TITLE, YEAR, DESCRIPTION, GENRE, OFFICIALSITE, PHOTO, RATE, PLAY_TIME) = (?,?,?,?,?,?,?,?) WHERE MOVIE_ID=? ";
+		String SQL = "update MOVIE SET TITLE=?,YEAR=?,DESCRIPTION=?,GENRE=?,OFFICIALSITE=?,PHOTO=?,RATE=?, PLAY_TIME=? where MOVIE_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,movie.getTitle());

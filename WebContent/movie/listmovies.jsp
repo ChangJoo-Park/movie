@@ -17,7 +17,6 @@ if(counter > 0 ){
 %>
 <hr><p>조회된 영화는 <%= counter  %> 개 입니다.</p><hr>
 <table>
-<thead>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
@@ -28,7 +27,6 @@ if(counter > 0 ){
 	<th><b>사진</b></th>
 	<th><b>상영시간</b></th>
 </tr>
-</thead>
 <%
 	for(MovieEntity movie : list){
 %>
