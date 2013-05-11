@@ -52,7 +52,9 @@ if(counter > 0 ){
 <%
 }
 %>
-
+<form name=form method=post action=editmovie.jsp>
+	<input type=submit value="영화 등록">
+</form>
 	
-</body>
+
 </html>
