@@ -55,7 +55,7 @@ public class MovieDatabase {
 		// ArrayList 내부에는 학생정보를 저장한 MovieEntity가 삽입됨.
 		ArrayList<MovieEntity>list = new ArrayList<MovieEntity>();
 		
-		String SQL = "select * from MOVIE_TEST";
+		String SQL = "select * from MOVIE";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			ResultSet rs = pstmt.executeQuery();
@@ -66,13 +66,15 @@ public class MovieDatabase {
 				MovieEntity movie = new MovieEntity();
 				
 				// 한 행의 영화 정보를 자바빈즈 객체에 저장 get~ 안의 문자열은 칼럼명과 동일하게 해야한다.
+				movie.setId(rs.getInt("MOVIE_ID"));
 				movie.setTitle(rs.getString("TITLE"));
+				movie.setYear(rs.getInt("YEAR"));
 				movie.setDescription(rs.getString("DESCRIPTION"));
 				movie.setGenre(rs.getString("GENRE"));
-				movie.setRelease_year(rs.getInt("RELEASE_YEAR"));
-				movie.setRate(rs.getInt("RATE"));
 				movie.setOfficialSite(rs.getString("OFFICIALSITE"));
+				movie.setRate(rs.getInt("RATE"));
 				movie.setPhoto(rs.getString("PHOTO"));
+				movie.setPlay_time(rs.getInt("PLAY_TIME"));
 				// ArrayList에 영화 정보 객체 MovieEntity를 추가
 				list.add(movie);
 			}
@@ -85,22 +87,24 @@ public class MovieDatabase {
 		// 완성된 ArrayList 객체를 반환
 		return list;
 	}
-	public MovieEntity getMovie(String title){
+	public MovieEntity getMovie(int id){
 		connect();
-		String SQL = "select * from MOVIE_TEST where TITLE = ?";
+		String SQL = "select * from MOVIE where MOVIE_ID = ?";
 		MovieEntity movie = new MovieEntity();
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1, title);
+			pstmt.setInt(1,id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
+			movie.setId(rs.getInt("MOVIE_ID"));
 			movie.setTitle(rs.getString("TITLE"));
+			movie.setYear(rs.getInt("YEAR"));
 			movie.setDescription(rs.getString("DESCRIPTION"));
 			movie.setGenre(rs.getString("GENRE"));
-			movie.setRelease_year(rs.getInt("RELEASE_YEAR"));
-			movie.setRate(rs.getInt("RATE"));
 			movie.setOfficialSite(rs.getString("OFFICIALSITE"));
+			movie.setRate(rs.getInt("RATE"));
 			movie.setPhoto(rs.getString("PHOTO"));
+			movie.setPlay_time(rs.getInt("PLAY_TIME"));
 			rs.close();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -112,16 +116,17 @@ public class MovieDatabase {
 	public boolean insertDB(MovieEntity movie){
 		boolean success = false;
 		connect();
-		String SQL = "insert into MOVIE_TEST values(?,?,?,?,?,?,?)";
+		String SQL = "insert into MOVIE values(MOVIE_ID.nextval,?,?,?,?,?,?,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,movie.getTitle());
-			pstmt.setString(2,movie.getDescription());
-			pstmt.setString(3,movie.getGenre());
-			pstmt.setInt(4, movie.getRelease_year());
-			pstmt.setInt(5, movie.getRate());
-			pstmt.setString(6,movie.getOfficialSite());
-			pstmt.setString(7,movie.getPhoto());
+			pstmt.setInt(2, movie.getYear());
+			pstmt.setString(3,movie.getDescription());
+			pstmt.setString(4,movie.getGenre());
+			pstmt.setString(5,movie.getOfficialSite());
+			pstmt.setString(6,movie.getPhoto());
+			pstmt.setInt(7, movie.getRate());
+			pstmt.setInt(8, movie.getPlay_time());
 			pstmt.executeUpdate();
 			success = true;
 		}catch(Exception e){
@@ -135,16 +140,18 @@ public class MovieDatabase {
 	public boolean updateDB(MovieEntity movie){
 		boolean success = false;
 		connect();
-		String SQL = "update MOVIE_TEST set TITLE=?, DESCRIPTION=?,GENRE=?, RELEASE_YEAR=?, RATE=?, OFFICIALSITE=?, PHOTO=? where TITLE=? ";
+		String SQL = "update MOVIE SET TITLE=?,YEAR=?,DESCRIPTION=?,GENRE=?,OFFICIALSITE=?,PHOTO=?,RATE=?, PLAY_TIME=? where MOVIE_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,movie.getTitle());
-			pstmt.setString(2,movie.getDescription());
-			pstmt.setString(3,movie.getGenre());
-			pstmt.setInt(4, movie.getRelease_year());
-			pstmt.setInt(5, movie.getRate());
-			pstmt.setString(6,movie.getOfficialSite());
-			pstmt.setString(7,movie.getPhoto());
+			pstmt.setInt(2, movie.getYear());
+			pstmt.setString(3,movie.getDescription());
+			pstmt.setString(4,movie.getGenre());
+			pstmt.setString(5,movie.getOfficialSite());
+			pstmt.setString(6,movie.getPhoto());
+			pstmt.setInt(7, movie.getRate());
+			pstmt.setInt(8, movie.getPlay_time());
+			pstmt.setInt(9, movie.getId());
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
 		}catch(Exception e){
@@ -155,13 +162,13 @@ public class MovieDatabase {
 		}
 		return success;
 	}
-	public boolean deleteDB(String title){
+	public boolean deleteDB(int id){
 		boolean success = false;
 		connect();
-		String SQL = "delete from MOVIE_TEST where TITLE = ?";
+		String SQL = "delete from MOVIE where MOVIE_ID = ?";
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1,title);
+			pstmt.setInt(1,id);
 			pstmt.executeUpdate();
 			success = true;
 		}catch(Exception e){
@@ -172,5 +179,4 @@ public class MovieDatabase {
 		}
 		return success;
 	}
-	
 }

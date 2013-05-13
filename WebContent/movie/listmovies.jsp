@@ -6,16 +6,17 @@
 </head>
 <body>
 <%@ page import="java.util.ArrayList, movie.MovieEntity" %>
-<h2>자바 빈즈 MovieDatabase를 이용한 테이블 MOVIE_TEST 조회</h2>
-<hr>
+<h2>자바 빈즈 MovieDatabase를 이용한 테이블 MOVIE 조회</h2>
 <jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
 <%
+request.setCharacterEncoding("euc-kr");
+
 ArrayList<MovieEntity>list = moviedb.getMovieList();
 int counter = list.size();
 if(counter > 0 ){
 %>
+<hr><p>조회된 영화는 <%= counter  %> 개 입니다.</p><hr>
 <table>
-<thead>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
@@ -24,27 +25,34 @@ if(counter > 0 ){
 	<th><b>평점</b></th>
 	<th><b>공식홈페이지</b></th>
 	<th><b>사진</b></th>
+	<th><b>상영시간</b></th>
 </tr>
-</thead>
 <%
 	for(MovieEntity movie : list){
 %>
-<tbody>
 <tr>
-	<td><%= movie.getTitle() %></td>
+	<td><%= movie.getTitle() %><a href="editmovie.jsp?id=<%=movie.getId()%>">수정</a></td>
 	<td><%= movie.getDescription() %></td>
 	<td><%= movie.getGenre() %></td>
-	<td><%= movie.getRelease_year() %></td>
+	<td><%= movie.getYear() %></td>
 	<td><%= movie.getRate() %></td>
-	<td><%= movie.getOfficialSite() %></td>
-	<td><%= movie.getPhoto() %></td>
+	<td><a href="<%= movie.getOfficialSite() %>">공식홈페이지</a></td>
+	<td><img src="<%= movie.getPhoto() %>"/></td>
+	<td><%= movie.getPlay_time() %></td>
 </tr>
-</tbody>
+</table>
 <%
 	}
+	
+}else{
+%>
+	<p>등록된 영화가 하나도 없습니다.</p>
+<%
 }
 %>
-</table>
-<p><hr>조회된 영화는 <%= counter  %>개 입니다.	
-</body>
+<form name=form method=post action=editmovie.jsp>
+	<input type=submit value="영화 등록">
+</form>
+	
+
 </html>
