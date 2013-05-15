@@ -1,4 +1,4 @@
-package movie;
+package theater;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class MovieDatabase {
+public class TheaterDatabase {
 	// 데이터베이스 연결 관련 변수 선언
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private DataSource ds = null;
 	
 	// 등록한 DBCP 데이터소스를 찾아 저장하는 생성자
-	public MovieDatabase(){
+	public TheaterDatabase(){
 		try{
 			InitialContext ctx = new InitialContext();
 			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
@@ -49,13 +49,13 @@ public class MovieDatabase {
 		}
 	}
 	// 모든 레코드를 반환하는 메소드
-	public ArrayList<MovieEntity>getMovieList(){
+	public ArrayList<TheaterEntity>getTheaterList(){
 		connect();
 		// 질의 결과를 저장할 ArrayList 선언
 		// ArrayList 내부에는 학생정보를 저장한 MovieEntity가 삽입됨.
-		ArrayList<MovieEntity>list = new ArrayList<MovieEntity>();
+		ArrayList<TheaterEntity>list = new ArrayList<TheaterEntity>();
 		
-		String SQL = "select * from MOVIE";
+		String SQL = "select * from THEATER";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			ResultSet rs = pstmt.executeQuery();
@@ -63,20 +63,18 @@ public class MovieDatabase {
 			// ResultSet의 결과에서 모든 행을 각각의 MovieEntity 객체에 저장
 			while(rs.next()){
 				// 한 영화의 정보를 저장할 빈즈 객체 생성
-				MovieEntity movie = new MovieEntity();
+				TheaterEntity theater = new TheaterEntity();
 				
 				// 한 행의 영화 정보를 자바빈즈 객체에 저장 get~ 안의 문자열은 칼럼명과 동일하게 해야한다.
-				movie.setId(rs.getInt("MOVIE_ID"));
-				movie.setTitle(rs.getString("TITLE"));
-				movie.setYear(rs.getInt("YEAR"));
-				movie.setDescription(rs.getString("DESCRIPTION"));
-				movie.setGenre(rs.getString("GENRE"));
-				movie.setOfficialSite(rs.getString("OFFICIALSITE"));
-				movie.setRate(rs.getInt("RATE"));
-				movie.setPhoto(rs.getString("PHOTO"));
-				movie.setPlay_time(rs.getInt("PLAY_TIME"));
+				
+				theater.setLocation(rs.getString("LOCATION"));
+				theater.setAddress(rs.getString("ADDRESS"));
+				theater.setRoom_num(rs.getString("ROOM_NUM"));
+				theater.setSeat(rs.getString("SEAT"));
+				theater.setTime_schedule(rs.getString("TIME_SCHEDULE"));
+			
 				// ArrayList에 영화 정보 객체 MovieEntity를 추가
-				list.add(movie);
+				list.add(theater);
 			}
 			rs.close();
 		}catch(Exception e){
@@ -87,46 +85,42 @@ public class MovieDatabase {
 		// 완성된 ArrayList 객체를 반환
 		return list;
 	}
-	public MovieEntity getMovie(int id){
+	public TheaterEntity getTheater(int id){
 		connect();
-		String SQL = "select * from MOVIE where MOVIE_ID = ?";
-		MovieEntity movie = new MovieEntity();
+		String SQL = "select * from THEATER where THEATER_ID = ?";
+		TheaterEntity theater = new TheaterEntity();
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setInt(1,id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			movie.setId(rs.getInt("MOVIE_ID"));
-			movie.setTitle(rs.getString("TITLE"));
-			movie.setYear(rs.getInt("YEAR"));
-			movie.setDescription(rs.getString("DESCRIPTION"));
-			movie.setGenre(rs.getString("GENRE"));
-			movie.setOfficialSite(rs.getString("OFFICIALSITE"));
-			movie.setRate(rs.getInt("RATE"));
-			movie.setPhoto(rs.getString("PHOTO"));
-			movie.setPlay_time(rs.getInt("PLAY_TIME"));
+			theater.setId(rs.getInt("THEATER_ID"));
+			theater.setLocation(rs.getString("LOCATION"));
+			theater.setAddress(rs.getString("ADDRESS"));
+			theater.setRoom_num(rs.getString("ROOM_NUM"));
+			theater.setSeat(rs.getString("SEAT"));
+			theater.setTime_schedule(rs.getString("TIME_SCHEDULE"));
+			
 			rs.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			disconnect();
 		}
-		return movie;
+		return theater;
 	}
-	public boolean insertDB(MovieEntity movie){
+	public boolean insertDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "insert into MOVIE values(MOVIE_ID.nextval,?,?,?,?,?,?,?,?)";
+		String SQL = "insert into THEATER values(THEATER_ID.nextval,?,?,?,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1,movie.getTitle());
-			pstmt.setInt(2, movie.getYear());
-			pstmt.setString(3,movie.getDescription());
-			pstmt.setString(4,movie.getGenre());
-			pstmt.setString(5,movie.getOfficialSite());
-			pstmt.setString(6,movie.getPhoto());
-			pstmt.setInt(7, movie.getRate());
-			pstmt.setInt(8, movie.getPlay_time());
+			pstmt.setString(1,theater.getAddress());
+			pstmt.setString(2, theater.getLocation());
+			pstmt.setString(3,theater.getRoom_num());
+			pstmt.setString(4,theater.getSeat());
+			pstmt.setString(5,theater.getTime_schedule());
+			
 			pstmt.executeUpdate();
 			success = true;
 		}catch(Exception e){
@@ -137,21 +131,19 @@ public class MovieDatabase {
 		}
 		return success;
 	}
-	public boolean updateDB(MovieEntity movie){
+	public boolean updateDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "update MOVIE SET TITLE=?,YEAR=?,DESCRIPTION=?,GENRE=?,OFFICIALSITE=?,PHOTO=?,RATE=?, PLAY_TIME=? where MOVIE_ID=?";
+		String SQL = "update THEATER SET LOCATION=?,ADDRESS=?,ROOM_NUM=?,SEAT=?,TIME_SCHEDULE=? where THEATER_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1,movie.getTitle());
-			pstmt.setInt(2, movie.getYear());
-			pstmt.setString(3,movie.getDescription());
-			pstmt.setString(4,movie.getGenre());
-			pstmt.setString(5,movie.getOfficialSite());
-			pstmt.setString(6,movie.getPhoto());
-			pstmt.setInt(7, movie.getRate());
-			pstmt.setInt(8, movie.getPlay_time());
-			pstmt.setInt(9, movie.getId());
+			pstmt.setString(1,theater.getLocation());
+			pstmt.setString(2, theater.getAddress());
+			pstmt.setString(3,theater.getRoom_num());
+			pstmt.setString(4,theater.getSeat());
+			pstmt.setString(5,theater.getTime_schedule());
+			pstmt.setInt(6,theater.getId());
+			
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
 		}catch(Exception e){
@@ -165,7 +157,7 @@ public class MovieDatabase {
 	public boolean deleteDB(int id){
 		boolean success = false;
 		connect();
-		String SQL = "delete from MOVIE where MOVIE_ID = ?";
+		String SQL = "delete from THEATER where THEATER_ID = ?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setInt(1,id);
