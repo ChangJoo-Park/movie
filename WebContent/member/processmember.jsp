@@ -7,46 +7,42 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="movie" class="movie.MovieEntity" scope="page"></jsp:useBean>
-<jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
+<jsp:useBean id="member" class="member.MemberEntity" scope="page"></jsp:useBean>
+<jsp:useBean id="memberdb" class="member.MemberDatabase" scope="page"></jsp:useBean>
 <%
 	request.setCharacterEncoding("euc-kr");
 	// menu 저장(등록, 수정, 삭제)
 	String menu = request.getParameter("menu");
 	if(menu.equals("delete") || menu.equals("update")){
-		String movie_id = request.getParameter("id");
-		int idnum = Integer.parseInt(movie_id);
-		String title = request.getParameter("title");
-		String year = request.getParameter("year");
-		String description = request.getParameter("description");
-		String genre = request.getParameter("genre");
-		String officialSite = request.getParameter("officialSite");
-		String photo = request.getParameter("photo");
-		String rate = request.getParameter("rate");
-		String playTime = request.getParameter("play_time");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String mail = request.getParameter("mail");
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String faverite_theater = request.getParameter("favorite_theater");
+		
 		
 		if(menu.equals("delete")){
-			moviedb.deleteDB(idnum);
+			memberdb.deleteDB(id);
 		}else if(menu.equals("update")){
 %>
-		<jsp:setProperty property="*" name="movie"/>
+		<jsp:setProperty property="*" name="member"/>
 <%			
-			moviedb.updateDB(movie);
+			memberdb.updateDB(member);
 		}
-		response.sendRedirect("listmovies.jsp");	
+		response.sendRedirect("listmembers.jsp");	
 	}else if(menu.equals("insert")){
 %>
-	<jsp:setProperty property="title" name="movie"/>
-	<jsp:setProperty property="year" name="movie"/>
-	<jsp:setProperty property="description" name="movie"/>
-	<jsp:setProperty property="genre" name="movie"/>
-	<jsp:setProperty property="officialSite" name="movie"/>
-	<jsp:setProperty property="photo" name="movie"/>
-	<jsp:setProperty property="rate" name="movie"/>
-	<jsp:setProperty property="play_time" name="movie"/>
+	<jsp:setProperty property="id" name="member"/>
+	<jsp:setProperty property="password" name="member"/>
+	<jsp:setProperty property="mail" name="member"/>
+	<jsp:setProperty property="name" name="member"/>
+	<jsp:setProperty property="address" name="member"/>
+	<jsp:setProperty property="favorite_theater" name="member"/>
+	
 <%
-		moviedb.insertDB(movie);
-		response.sendRedirect("listmovies.jsp");
+		memberdb.insertDB(member);
+		response.sendRedirect("listmembers.jsp");
 	}
 	
 %>
