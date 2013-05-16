@@ -1,7 +1,7 @@
 package member;
 /**
  * id			: string
- * pw			: string
+ * password		: string
  * mail			: string
  * name			: string
  * address		: string
@@ -9,11 +9,11 @@ package member;
  */
 public class MemberEntity {
 	private String id;
-	private String pw;
+	private String password;
 	private String mail;
 	private String name;
 	private String address;
-	private String fa_theater;
+	private String favorite_theater;
 	
 	public String getId() {
 		return id;
@@ -21,11 +21,11 @@ public class MemberEntity {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword() {
+		return password;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getMail() {
 		return mail;
@@ -45,10 +45,10 @@ public class MemberEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getFa_theater() {
-		return fa_theater;
+	public String getFavorite_theater() {
+		return favorite_theater;
 	}
-	public void setFa_theater(String fa_theater) {
-		this.fa_theater = fa_theater;
-	}			
+	public void setFavorite_theater(String favorite_theater) {
+		this.favorite_theater = favorite_theater;
+	}		
 }

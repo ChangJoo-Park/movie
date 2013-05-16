@@ -30,11 +30,11 @@ if(counter > 0 ){
 %>
 <tr>
 	<td><%= member.getId() %><a href="editmember.jsp?id=<%=member.getId()%>">수정</a></td>
-	<td><%= member.getPw() %></td>
+	<td><%= member.getPassword() %></td>
 	<td><%= member.getMail() %></td>
 	<td><%= member.getName() %></td>
 	<td><%= member.getAddress() %></td>
-	<td><a href="<%= member.getFa_theater() %>">공식홈페이지</a></td>	
+	<td><%= member.getFavorite_theater() %></td>	
 </tr>
 </table>
 <%
