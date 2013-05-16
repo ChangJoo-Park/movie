@@ -66,11 +66,11 @@ public class MemberDatabase {
 				
 				// 한 행의 회원 정보를 자바빈즈 객체에 저장 get~ 안의 문자열은 칼럼명과 동일하게 해야한다.
 				member.setId(rs.getString("ID"));
-				member.setPw(rs.getString("PASSWORD"));
+				member.setPassword(rs.getString("PASSWORD"));
 				member.setMail(rs.getString("MAIL"));
 				member.setName(rs.getString("NAME"));
 				member.setAddress(rs.getString("ADDRESS"));
-				member.setFa_theater(rs.getString("FAVORITE_THEATER"));
+				member.setFavorite_theater(rs.getString("FAVORITE_THEATER"));
 				// ArrayList에 영화 정보 객체 MovieEntity를 추가
 				list.add(member);
 			}
@@ -85,7 +85,7 @@ public class MemberDatabase {
 	}
 	public MemberEntity getMember(String id){
 		connect();
-		String SQL = "select * from MOVIE where MOVIE_ID = ?";
+		String SQL = "select * from MOVIE_MEMBER where id = ?";
 		MemberEntity member = new MemberEntity();
 		try{
 			pstmt = con.prepareStatement(SQL);
@@ -93,11 +93,11 @@ public class MemberDatabase {
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			member.setId(rs.getString("ID"));
-			member.setPw(rs.getString("PASSWORD"));
+			member.setPassword(rs.getString("PASSWORD"));
 			member.setMail(rs.getString("MAIL"));
 			member.setName(rs.getString("NAME"));
 			member.setAddress(rs.getString("ADDRESS"));
-			member.setFa_theater(rs.getString("FAVORITE_THEATER"));
+			member.setFavorite_theater(rs.getString("FAVORITE_THEATER"));
 			
 			rs.close();
 		}catch(Exception e){
@@ -109,16 +109,17 @@ public class MemberDatabase {
 	}
 	public boolean insertDB(MemberEntity member){
 		boolean success = false;
+		System.out.println(member.getId());
 		connect();
-		String SQL = "insert into Movie_member values(MOVIE_ID.nextval,?,?,?,?,?,?)";
+		String SQL = "insert into Movie_member values(?,?,?,?,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setString(1,member.getId());
-			pstmt.setString(2, member.getPw());
+			pstmt.setString(2,member.getPassword());
 			pstmt.setString(3,member.getMail());
 			pstmt.setString(4,member.getName());
 			pstmt.setString(5,member.getAddress());
-			pstmt.setString(6,member.getFa_theater());
+			pstmt.setString(6,member.getFavorite_theater());
 			pstmt.executeUpdate();
 			success = true;
 		}catch(Exception e){
@@ -135,11 +136,11 @@ public class MemberDatabase {
 		String SQL = "update MOVIE_MEMBER SET PASSWORD=?,MAIL=?,NAME=?,ADDRESS=?,FAVORITE_THEATER=? where ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
-			pstmt.setString(1,member.getPw());
+			pstmt.setString(1,member.getPassword());
 			pstmt.setString(2,member.getMail());
 			pstmt.setString(3,member.getName());
 			pstmt.setString(4,member.getAddress());
-			pstmt.setString(5,member.getFa_theater());
+			pstmt.setString(5,member.getFavorite_theater());
 			pstmt.setString(6,member.getId());
 			
 			int rowUdt = pstmt.executeUpdate(); 

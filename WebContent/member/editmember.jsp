@@ -25,11 +25,11 @@
 		String idnum = member_id;
 		MemberDatabase memberdb = new MemberDatabase();
 		MemberEntity member	= memberdb.getMember(idnum);
-		password = member.getPw();
+		password = member.getPassword();
 		mail = member.getMail();
 		name = member.getName();
 		address = member.getAddress();
-		favorite_theater = member.getFa_theater();
+		favorite_theater = member.getFavorite_theater();
 		
 		headline = "수정 삭제";	
 	};
@@ -39,15 +39,15 @@
 <!-- menu : 등록, 수정 또는 삭제 구분을 위한 매개변수로 이용 -->
 <input type=hidden name="menu" value="insert">
 <!-- 수정, 삭제를 위한 parameter 전송 -->
-<input type=hidden name="id" value="<%= member_id %>">
+
 <table>
 <tr>
-<td>아이디 : <input type=text name=title value="<%= id %>"/></td>
-<td>패스워드 : <input type=number name=year value="<%= password %>"></td>
-<td>메일 : <input type=text name=description value="<%= mail %>"></td>
-<td>이름 : <input type=text name=genre value="<%= name %>"></td>
-<td>주소 : <input type=text name=officialSite value="<%= address %>"></td>
-<td>선호 영화관 : <input type=text name=photo value="<%= favorite_theater %>"></td>
+<td>아이디 : <input type=text name=id value="<%= id %>"/></td>
+<td>패스워드 : <input type=text name=password value="<%= password %>"></td>
+<td>메일 : <input type=text name=mail value="<%= mail %>"></td>
+<td>이름 : <input type=text name=name value="<%= name %>"></td>
+<td>주소 : <input type=text name=address value="<%= address %>"></td>
+<td>선호 영화관 : <input type=text name=favorite_theater value="<%= favorite_theater %>"></td>
 
 </tr>
 </table>
@@ -56,7 +56,7 @@
 <%}else{ %>
 	<input type="button" value="수정" onClick="updatecheck()"><input type="button" value="삭제" onClick="deletecheck()">
 <% } %>
-<input type="button" value="목록" onClick="location.href='listmember.jsp'">
+<input type="button" value="목록" onClick="location.href='listmembers.jsp'">
 
 </form>
 </body>
