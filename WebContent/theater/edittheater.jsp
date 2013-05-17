@@ -35,7 +35,7 @@
 	};
 %>
 <h2> 극장 <%= headline %> 프로그램 </h2>
-<form name=theaterform method=post action="processthetaer.jsp">
+<form name=theaterform method=post action="processtheater.jsp">
 <!-- menu : 등록, 수정 또는 삭제 구분을 위한 매개변수로 이용 -->
 <input type=hidden name="menu" value="insert">
 <!-- 수정, 삭제를 위한 parameter 전송 -->
@@ -44,9 +44,9 @@
 <tr>
 <td>위치 : <input type=text name=location value="<%= location %>"></td>
 <td>주소 : <input type=text name=address value="<%= address %>"/></td>
-<td>관 : <input type=number name=room_num value="<%= room_num %>"></td>
+<td>관 : <input type=text name=room_num value="<%= room_num %>"></td>
 <td>좌석 : <input type=text name=seat value="<%= seat %>"></td>
-<td>장르 : <input type=text name=time_schedule value="<%= time_schedule %>"></td>
+<td>상영시간 : <input type=text name=time_schedule value="<%= time_schedule %>"></td>
 
 </tr>
 </table>
