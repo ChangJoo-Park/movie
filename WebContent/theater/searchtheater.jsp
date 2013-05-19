@@ -15,14 +15,14 @@ PreparedStatement pstmt = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
 String dbURL = "jdbc:oracle:thin:@oracle.hotsun0428.cafe24.com:1521:orcl";
 String sql = "select * from THEATER where location like ?";
-String theaterlocation = "%" + request.getParameter("theaterlocation") + "%";
+String theatertitle = "%" + request.getParameter("theatertitle") + "%";
 int rowCount = 0 ;
 
 try{
 	Class.forName(driverName);
 	conn = DriverManager.getConnection(dbURL,"hotsun0428","rudah0428");
 	pstmt = conn.prepareStatement(sql);
-	pstmt.setString(1,theaterlocation);
+	pstmt.setString(1,theatertitle);
 	ResultSet result = pstmt.executeQuery();
 %>
 <table>
@@ -33,7 +33,7 @@ try{
 	<th><b>관</b></th>
 	<th><b>좌석</b></th>
 	<th><b>상영시간</b></th>
-	
+
 </tr>
 </thead>
 <tbody>
@@ -47,7 +47,7 @@ try{
 	<td><%=result.getString(3) %></td>
 	<td><%=result.getString(4) %></td>
 	<td><%=result.getString(5) %></td>
-	
+
 </tr>
 </tbody>
 <%
