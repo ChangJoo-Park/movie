@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>영화 리스트</title>
+<title> 극장 리스트</title>
 </head>
 <body>
 <%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
-<h2>자바 빈즈 MovieDatabase를 이용한 테이블 MOVIE 조회</h2>
+<h2>자바 빈즈 TheaterDatabase를 이용한 테이블 THEATER 조회</h2>
 <jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>
 <%
 request.setCharacterEncoding("euc-kr");
@@ -42,12 +42,12 @@ if(counter > 0 ){
 	
 }else{
 %>
-	<p>등록된 영화가 하나도 없습니다.</p>
+	<p>등록된 극장이 하나도 없습니다.</p>
 <%
 }
 %>
 <form name=form method=post action=edittheater.jsp>
-	<input type=submit value="영화 등록">
+	<input type=submit value="극장 등록">
 </form>
 	
 
