@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>영화 등록</title>
+<title>극장 등록</title>
 <script src="assets/scripts/theaterform.js"></script>
 </head>
 <body>
