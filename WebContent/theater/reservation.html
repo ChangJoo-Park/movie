@@ -2,6 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
+
+<script src="../assets/js/bootstrap.min.js"></script>
+
 <title>Insert title here</title>
 </head>
 <SCRIPT LANGUAGE="JavaScript">
@@ -29,7 +35,7 @@
 		obj.document
 				.write("<center><h1>" + year + "년 " + (m + 1) + "월 달력</h1>"); // 제목 출력
 		obj.document
-				.write("<table border=0 bgcolor=black cellspacing=1>\n<tr>");
+				.write("<table border=0 bgcolor=black cellspacing=1>\n");
 		// 요일 출력하기.
 		for (i = 0; i < yoil.length; i++) {
 			if (i == 0)
@@ -41,7 +47,7 @@
 		}
 		// 달력 처음이 일요일이 아니면 회색으로 채움.
 		if (day.getDay() != 0) {
-			obj.document.write("<tr>");
+			obj.document.write("");
 			for (i = 0; i < day.getDay(); i++)
 				obj.document.write("<td bgcolor=#C0C0C0>&nbsp;");
 		}
@@ -49,7 +55,7 @@
 		for (i = 1; i <= mon[day.getMonth()]; i++) {
 			today = new Date(y, m, i); // 오늘 날짜를 얻음 -> 요일을 알기 위해서.
 			if (today.getDay() == 0) // 일요일이면 다음 줄로 넘어감.
-				obj.document.write("<tr>");
+				obj.document.write("");
 			if (today.getDay() == 0) // 날짜를 요일색깔별로 출력
 				obj.document.write("<td bgcolor=#FF8080>" + i);
 			else if (today.getDay() == 6)
@@ -66,94 +72,82 @@
 	-->
 </SCRIPT>
 <body>
-	<h2>영화 예매</h2>
-	<h3>극장 선택</h3>
-	<form method="post" name=reservation action=reservation.jsp>
-		<table border=1 cellpadding=5>
-			<tr>
-				<td colspan=8>영화선택</td>
-			</tr>
-			<tr>
-				<td><input type=checkbox id=movie name=movie value="위대한개츠비">위대한개츠비</td>
-				<td><input type=checkbox name=movie value="몽타주">몽타주</td>
-				<td><input type=checkbox name=movie value="아이언맨3">아이언맨3</td>
-				<td><input type=checkbox name=movie value="고령화가족">고령화가족</td>
-				<td><input type=checkbox name=movie value="미나문방구">미나문방구</td>
-				<td><input type=checkbox name=movie value="로마위드러브">로마위드러브</td>
-				<td><input type=checkbox name=movie value="분노의질주">분노의질주-더맥시멈</td>
-				<td><input type=checkbox name=movie value="크루즈패밀리">크루즈패밀리</td>
-			</tr>
+	<h1 class="text-center">영화 예매</h1>
+	<div class="container">
+	<form class="form-inline" method="post" name=reservation action=reservation.jsp>
+		<div class="reserve_movie control-group radio_buttons required">
+		<h2 class="text-center">영화선택</h2>
+		<label class="radio" for=movie_1><input type=radio id=movie_1 name=movie value="위대한개츠비"><img src="assets/images/test.jpg"/>위대한개츠비</label>
+		<label class="radio" for=movie_2><input type=radio id=movie_2 name=movie value="몽타주"><img src="assets/images/test.jpg"/>몽타주</label>
+		<label class="radio" for=movie_3><input type=radio id=movie_3 name=movie value="아이언맨3"><img src="assets/images/test.jpg"/>아이언맨3</label>
+		<label class="radio" for=movie_4><input type=radio id=movie_4 name=movie value="고령화가족"><img src="assets/images/test.jpg"/>고령화가족</label>
+		<label class="radio" for=movie_5><input type=radio id=movie_5 name=movie value="미나문방구"><img src="assets/images/test.jpg"/>미나문방구</label>
+		<label class="radio" for=movie_6><input type=radio id=movie_6 name=movie value="로마위드러브"><img src="assets/images/test.jpg"/>로마위드러브</label>
+		<label class="radio" for=movie_7><input type=radio id=movie_7 name=movie value="분노의질주"><img src="assets/images/test.jpg"/>분노의질주-더맥시멈</label>
+		<label class="radio" for=movie_8><input type=radio id=movie_8 name=movie value="크루즈패밀리"><img src="assets/images/test.jpg"/>크루즈패밀리</label>
+		</div>
 
-			<tr>
-				<td colspan=8>극장 선택</td>
-			</tr>
-			<tr>
-				<td><input type=checkbox name=theater value=명동>명동</td>
-				<td><input type=checkbox name=theater value=강남>강남</td>
-				<td><input type=checkbox name=theater value=강동>강동</td>
-				<td><input type=checkbox name=theater value=강변>강변</td>
-				<td><input type=checkbox name=theater value=구로>구로</td>
-				<td><input type=checkbox name=theater value=군자>군자</td>
-				<td><input type=checkbox name=theater value=김포공항>김포공항</td>
-				<td><input type=checkbox name=theater value=대학로>대학로</td>
-			</tr>
-			<tr>
-				<td colspan=8>날짜 선택</td>
-			</tr>
-			<tr>
-				<td colspan=8 align=center><iframe src="" width=400 height=300
-						name=calendar></iframe><br> <select
-					onChange="y=this.value;makeCal(frames[0]);">
-						<script language="javascript">
-							for (i = y - 100; i <= y + 100; i++) {
-								document.write("<option value='" + i + "' ");
-								if (i == y)
-									document.write("selected");
-								document.writeln(">" + i);
-							}
-						</script>
-				</select>년 <script language="javascript">
-					makeCal(frames[0]);
-					for (i = 1; i <= 12; i++)
-						document.write("<a href='#' onClick='m=" + (i - 1)
-								+ ";makeCal(frames[0]);'>" + i + "월</a>"
-								+ "&nbsp;&nbsp;");
-				</script></td>
-			</tr>
-			<tr>
-				<td colspan=8>관 선택</td>
-			</tr>
-			<tr>
-				<td><input type=checkbox name=room value=1관>1</td>
-				<td><input type=checkbox name=room value=2관>2</td>
-				<td><input type=checkbox name=room value=3관>3</td>
-				<td><input type=checkbox name=room value=4관>4</td>
-				<td><input type=checkbox name=room value=5관>5</td>
-				<td><input type=checkbox name=room value=6관>6</td>
-				<td><input type=checkbox name=room value=7관>7</td>
-				<td><input type=checkbox name=room value=8관>8</td>
-			<tr>
-				<td colspan=8>시간 선택</td>
-			</tr>
-			<tr>
-				<td><input type=checkbox name=time value=오전9시>9:00</td>
-				<td><input type=checkbox name=time value=오전10시>10:00</td>
-				<td><input type=checkbox name=time value=오전11시50분>11:50</td>
-				<td><input type=checkbox name=time value=오후12시40분>12:40</td>
-				<td><input type=checkbox name=time value=오후3시20분>15:20</td>
-				<td><input type=checkbox name=time value=오후4시55분>16:55</td>
-				<td><input type=checkbox name=time value=오후6시>18:00</td>
-				<td><input type=checkbox name=time value=오후7시35분>19:35</td>
-			</tr>
+		<div class="reserve_theater control-group radio_buttons required">	
+		<p class="text-center"><h2>극장 선택</h2></p>
+		<label class="radio" for="theater_1"><input type=radio id="theater_1" name=theater value="명동">명동</label>
+		<label class="radio" for="theater_2"><input type=radio id="theater_2" name=theater value="강남">강남</label>
+		<label class="radio" for="theater_3"><input type=radio id="theater_3" name=theater value="강동">강동</label>
+		<label class="radio" for="theater_4"><input type=radio id="theater_4" name=theater value="강변">강변</label>
+		<label class="radio" for="theater_5"><input type=radio id="theater_5" name=theater value="구로">구로</label>
+		<label class="radio" for="theater_6"><input type=radio id="theater_6" name=theater value="군자">군자</label>
+		<label class="radio" for="theater_7"><input type=radio id="theater_7" name=theater value="김포공항">김포공항</label>
+		<label class="radio" for="theater_8"><input type=radio id="theater_8" name=theater value="대학로">대학로</label>
+		</div>
 
-			<tr>
-				<td align=center colspan=8><input type=submit value=예매></td>
-			</tr>
+		<div class="reserve_date">
+		<p class="text-center"><h2>날짜 선택</h2></p>
+		<iframe  src="" width=400 height=300 name=calendar></iframe><br> 
+		<select	onChange="y=this.value;makeCal(frames[0]);">
+		<script>
+			for (i = y - 100; i <= y + 100; i++) {
+				document.write("<option value='" + i + "' ");
+				if (i == y)
+					document.write("selected");
+				document.writeln(">" + i);
+			}
+		</script>
+		</select>년
+		 <script language="javascript">
+			makeCal(frames[0]);
+			for (i = 1; i <= 12; i++)
+				document.write("<a href='#' onClick='m=" + (i - 1)
+						+ ";makeCal(frames[0]);'>" + i + "월</a>"
+						+ "&nbsp;&nbsp;");
+		</script>
+		</div>	
 
-		</table>
+		<div class="reserve_room control-group radio_buttons required">
+		<p class="text-center"><h2>관 선택</h2></p>
+		<label class="radio" for="room_1"><input type=radio id="room_1" name=room value="1관">1</label>
+		<label class="radio" for="room_2"><input type=radio id="room_2" name=room value="2관">2</label>
+		<label class="radio" for="room_3"><input type=radio id="room_3" name=room value="3관">3</label>
+		<label class="radio" for="room_4"><input type=radio id="room_4" name=room value="4관">4</label>
+		<label class="radio" for="room_5"><input type=radio id="room_5" name=room value="5관">5</label>
+		<label class="radio" for="room_6"><input type=radio id="room_6" name=room value="6관">6</label>
+		<label class="radio" for="room_7"><input type=radio id="room_7" name=room value="7관">7</label>
+		<label class="radio" for="room_8"><input type=radio id="room_8" name=room value="8관">8</label>
+		</div>
 
+		<div class="reserve_time control-group radio_buttons required">
+		<p class="text-center"><h2>시간 선택</h2></p>
+		<label class="radio" for="time_1"><input type=radio id="time_1" name=time value="오전9시">9:00</label>
+		<label class="radio" for="time_2"><input type=radio id="time_2" name=time value="오전10"시>10:00</label>
+		<label class="radio" for="time_3"><input type=radio id="time_3" name=time value="오전11시50분">11:50</label>
+		<label class="radio" for="time_4"><input type=radio id="time_4" name=time value="오후12시40분">12:40</label>
+		<label class="radio" for="time_5"><input type=radio id="time_5" name=time value="오후3시20분">15:20</label>
+		<label class="radio" for="time_6"><input type=radio id="time_6" name=time value="오후4시55분">16:55</label>
+		<label class="radio" for="time_7"><input type=radio id="time_7" name=time value="오후6시">18:00</label>
+		<label class="radio" for="time_8"><input type=radio id="time_8" name=time value="오후7시35분">19:35</label>
+		</div>
 
+			
+		<input type=submit value=예매>
 	</form>
-
+	</div>
 </body>
 </html>

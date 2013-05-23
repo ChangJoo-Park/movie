@@ -17,7 +17,6 @@ public class Test_JDBC_ORACLE {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		java.sql.Connection conn = null;
 		ResultSet rs = null;
 		Statement stmt = null;
@@ -25,7 +24,7 @@ public class Test_JDBC_ORACLE {
 		String id = "hotsun0428";
 		String pwd = "rudah0428";
 /**
- * °æ¸ðÇü cafe24 µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÀÖ´Â oracle dbÀÇ MOVIE_TEST Å×ÀÌºíÀ» ÀÌ¿ëÇÔ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ cafe24 ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ oracle dbï¿½ï¿½ MOVIE_TEST ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½
  * MOVIE_TEST
  * title 		: String
  * description 	: String
@@ -44,12 +43,11 @@ public class Test_JDBC_ORACLE {
 			
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("select * from MOVIE");
-			rs = stmt.executeQuery("insert into MOVIE(MOVIE_ID,TITLE,YEAR,DESCRIPTION,GENRE,OFFICIALSITE,PHOTO,RATE,PLAY_TIME) values(MOVIE_ID.nextval,'¾ÆÀÌ¾ð¸Ç3',2013,'d¿ë','¾×¼Ç','ÁÖ¼Ò','»çÁø',3,123)");
+			rs = stmt.executeQuery("insert into MOVIE(MOVIE_ID,TITLE,YEAR,DESCRIPTION,GENRE,OFFICIALSITE,PHOTO,RATE,PLAY_TIME) values(MOVIE_ID.nextval,'ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½3',2013,'dï¿½ï¿½','ï¿½×¼ï¿½','ï¿½Ö¼ï¿½','ï¿½ï¿½ï¿½ï¿½',3,123)");
 
 			stmt.close();
 			conn.close();
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		
