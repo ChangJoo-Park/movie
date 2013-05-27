@@ -1,25 +1,21 @@
 package theater;
 
 public class TheaterEntity {
-	private int id;
-	
-	private String	location;	
-	private String	address;
-	private String  room_num;
-	private String 	seat;
-	private String time_schedule;
-	public int getId() {
-		return id;
+	private int theater_id;
+	private String theater_name;
+	private String address;
+	private String theater_room_id;
+	public int getTheater_id() {
+		return theater_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setTheater_id(int theater_id) {
+		this.theater_id = theater_id;
 	}
-	
-	public String getLocation() {
-		return location;
+	public String getTheater_name() {
+		return theater_name;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setTheater_name(String theater_name) {
+		this.theater_name = theater_name;
 	}
 	public String getAddress() {
 		return address;
@@ -27,22 +23,14 @@ public class TheaterEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getRoom_num() {
-		return room_num;
+	public String getTheater_room_id() {
+		return theater_room_id;
 	}
-	public void setRoom_num(String room_num) {
-		this.room_num = room_num;
+	public void setTheater_room_id(String theater_room_id) {
+		this.theater_room_id = theater_room_id;
 	}
-	public String getSeat() {
-		return seat;
-	}
-	public void setSeat(String seat) {
-		this.seat = seat;
-	}
-	public String getTime_schedule() {
-		return time_schedule;
-	}
-	public void setTime_schedule(String time_schedule) {
-		this.time_schedule = time_schedule;
-	}
+	
+	
+	
+	
 }

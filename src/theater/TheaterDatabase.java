@@ -67,12 +67,11 @@ public class TheaterDatabase {
 				
 				// 한 행의 영화 정보를 자바빈즈 객체에 저장 get~ 안의 문자열은 칼럼명과 동일하게 해야한다.
 				
-				theater.setId(rs.getInt("THEATER_ID"));
-				theater.setLocation(rs.getString("LOCATION"));
+				theater.setTheater_id(rs.getInt("THEATER_ID"));
+				theater.setTheater_name(rs.getString("THEATER_NAME"));
 				theater.setAddress(rs.getString("ADDRESS"));
-				theater.setRoom_num(rs.getString("ROOM_NUM"));
-				theater.setSeat(rs.getString("SEAT"));
-				theater.setTime_schedule(rs.getString("TIME_SCHEDULE"));
+				theater.setTheater_room_id(rs.getString("THEATER_ROOM_ID"));
+				
 				// ArrayList에 영화 정보 객체 TheaterEntity를 추가
 				list.add(theater);
 			}
@@ -94,13 +93,11 @@ public class TheaterDatabase {
 			pstmt.setInt(1,id);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			theater.setId(rs.getInt("THEATER_ID"));
-			theater.setLocation(rs.getString("LOCATION"));
+			theater.setTheater_id(rs.getInt("THEATER_ID"));
+			theater.setTheater_name(rs.getString("THEATER_NAME"));
 			theater.setAddress(rs.getString("ADDRESS"));
-			theater.setRoom_num(rs.getString("ROOM_NUM"));
-			theater.setSeat(rs.getString("SEAT"));
-			theater.setTime_schedule(rs.getString("TIME_SCHEDULE"));
-		
+			theater.setTheater_room_id(rs.getString("THEATER_ROOM_ID"));
+			
 			rs.close();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -112,15 +109,15 @@ public class TheaterDatabase {
 	public boolean insertDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "insert into THEATER values(?,?,?,?,?,THEATER_ID.nextval)";
+		String SQL = "insert into THEATER values(THEATER_ID.nextval,?,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
 	
-			pstmt.setString(1, theater.getLocation());
-			pstmt.setString(2, theater.getAddress());
-			pstmt.setString(3, theater.getRoom_num());
-			pstmt.setString(4, theater.getSeat());
-			pstmt.setString(5, theater.getTime_schedule());
+			pstmt.setInt(1, theater.getTheater_id());
+			pstmt.setString(2, theater.getTheater_name());
+			pstmt.setString(3, theater.getAddress());
+			pstmt.setString(4, theater.getTheater_room_id());
+			
 			
 			pstmt.executeUpdate();
 			success = true;
@@ -135,16 +132,15 @@ public class TheaterDatabase {
 	public boolean updateDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "update THEATER SET LOCATION=?,ADDRESS=?,ROOM_NUM=?,SEAT=?,TIME_SCHEDULE=? where THEATER_ID=?";
+		String SQL = "update THEATER SET THEATER_NAME=?,ADDRESS=?,THEATER_ROOM_ID=? where THEATER_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			
-			pstmt.setString(1, theater.getLocation());
-			pstmt.setString(2, theater.getAddress());
-			pstmt.setString(3, theater.getRoom_num());
-			pstmt.setString(4, theater.getSeat());
-			pstmt.setString(5, theater.getTime_schedule());
-			pstmt.setInt(6, theater.getId());
+			pstmt.setInt(1, theater.getTheater_id());
+			pstmt.setString(2, theater.getTheater_name());
+			pstmt.setString(3, theater.getAddress());
+			pstmt.setString(4, theater.getTheater_room_id());
+			
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
 		}catch(Exception e){

@@ -9,15 +9,14 @@
 <%@ page import="java.util.ArrayList, theater.*" %>
 <%
 	request.setCharacterEncoding("euc-kr");
-	String	location	=	"";
+	String	theater_name	=	"";
 	String  address     =   "";
-	String	room_num	=	"";
-	String	seat	=	"";
-	String	time_schedule	=	"";
+	String	theater_room_id	=	"";
+	
 	
 	String	headline = "등록";
 
-	String theater_id= request.getParameter("id");
+	String theater_id= request.getParameter("theater_id");
 	
 	if (theater_id != null){
 		// 등록이 아닌 경우 출력을 위해 각 필드 내용을 저장
@@ -25,11 +24,9 @@
 		TheaterDatabase theaterdb = new TheaterDatabase();
 		TheaterEntity theater	= theaterdb.getTheater(idnum);
 		
-		location=theater.getLocation();
+		theater_name=theater.getTheater_name();
 		address=theater.getAddress();
-		room_num=theater.getRoom_num();
-		seat=theater.getSeat();
-		time_schedule=theater.getTime_schedule();
+		theater_room_id=theater.getTheater_room_id();
 		
 		headline = "수정 삭제";	
 	};
@@ -42,11 +39,10 @@
 <input type=hidden name="id" value="<%= theater_id %>">
 <table>
 <tr>
-<td>위치 : <input type=text name=location value="<%= location %>"></td>
+<td>이름 : <input type=text name=theater_name value="<%= theater_name %>"></td>
 <td>주소 : <input type=text name=address value="<%= address %>"/></td>
-<td>관 : <input type=text name=room_num value="<%= room_num %>"></td>
-<td>좌석 : <input type=text name=seat value="<%= seat %>"></td>
-<td>상영시간 : <input type=text name=time_schedule value="<%= time_schedule %>"></td>
+<td>관 : <input type=text name=theater_room_id value="<%= theater_room_id %>"></td>
+
 
 </tr>
 </table>

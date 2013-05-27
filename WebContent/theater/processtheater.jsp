@@ -16,11 +16,10 @@
 	if(menu.equals("delete") || menu.equals("update")){
 		String theater_id = request.getParameter("id");
 		int idnum = Integer.parseInt(theater_id);
-		String location = request.getParameter("location");
+		String location = request.getParameter("theater_name");
 		String address = request.getParameter("address");
-		String room_num = request.getParameter("room_num");
-		String seat = request.getParameter("seat");
-		String time_schedule = request.getParameter("time_schedule");
+		String room_num = request.getParameter("theater_room_id");
+		
 
 		if(menu.equals("delete")){
 			theaterdb.deleteDB(idnum);
@@ -33,11 +32,10 @@
 		response.sendRedirect("listtheaters.jsp");	
 	}else if(menu.equals("insert")){
 %>
-	<jsp:setProperty property="location" name="theater"/>
+	<jsp:setProperty property="theater_name" name="theater"/>
 	<jsp:setProperty property="address" name="theater"/>
-	<jsp:setProperty property="room_num" name="theater"/>
-	<jsp:setProperty property="seat" name="theater"/>
-	<jsp:setProperty property="time_schedule" name="theater"/>
+	<jsp:setProperty property="theater_room_id" name="theater"/>
+	
 	
 <%
 		theaterdb.insertDB(theater);

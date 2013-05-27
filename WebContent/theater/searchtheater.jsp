@@ -28,11 +28,10 @@ try{
 <table>
 <thead>
 <tr>
-	<th><b>위치</b></th>
+	<th><b>이름</th>
 	<th><b>주소</b></th>
 	<th><b>관</b></th>
-	<th><b>좌석</b></th>
-	<th><b>상영시간</b></th>
+	
 
 </tr>
 </thead>
@@ -45,8 +44,7 @@ try{
 	<td><%=result.getString(1) %></td>
 	<td><%=result.getString(2) %></td>
 	<td><%=result.getString(3) %></td>
-	<td><%=result.getString(4) %></td>
-	<td><%=result.getString(5) %></td>
+	
 
 </tr>
 </tbody>

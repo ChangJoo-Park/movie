@@ -18,22 +18,20 @@ if(counter > 0 ){
 <hr><p>조회된 극장은 <%= counter  %> 개 입니다.</p><hr>
 <table>
 <tr>
-	<th><b>위치</b></th>
+	<th><b>이름</b></th>
 	<th><b>주소</b></th>
 	<th><b>관</b></th>
-	<th><b>좌석</b></th>
-	<th><b>상영시간</b></th>
+	
 	
 </tr>
 <%
 	for(TheaterEntity theater : list){
 %>
 <tr>
-	<td><%= theater.getLocation() %><a href="edittheater.jsp?id=<%=theater.getId()%>">수정</a></td>
-	<td><%= theater.getAddress() %></td>
-	<td><%= theater.getRoom_num() %></td>
-	<td><%= theater.getSeat() %></td>
-	<td><%= theater.getTime_schedule() %></td>
+	<td><%= theater.getTheater_name()%><a href="edittheater.jsp?id=<%=theater.getTheater_id()%>">수정</a></td>
+	<td><%= theater.getAddress()%></td>
+	<td><%= theater.getTheater_room_id() %></td>
+	
 		
 </tr>
 </table>

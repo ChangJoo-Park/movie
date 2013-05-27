@@ -45,7 +45,7 @@
 		<%
 			for(TheaterEntity theater : theaterList){
 		%>
-			<li><label class="radio" for="theater_<%=theater.getId()%>"><input type="radio" id="movie_<%=theater.getId()%>" name = "theater"/><%= theater.getAddress() %></label></li>
+			<li><label class="radio" for="theater_<%=theater.getTheater_id()%>"><input type="radio" id="movie_<%=theater.getTheater_id()%>" name = "theater"/><%= theater.getAddress() %></label></li>
 		<%	
 			}
 		%>
