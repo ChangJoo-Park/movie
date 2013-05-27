@@ -10,7 +10,7 @@
 
 	<%
 		//넘어오는 값 한글 인코딩 처리하기
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 	%>
 
 
