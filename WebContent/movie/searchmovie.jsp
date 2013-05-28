@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 <%@ page import="java.sql.*" %>
-<% request.setCharacterEncoding("euc-kr"); %>
+<% request.setCharacterEncoding("utf-8"); %>
 <% 
 Connection conn = null;
 PreparedStatement pstmt = null;
@@ -28,13 +28,13 @@ try{
 <table>
 <thead>
 <tr>
-	<th><b>¿µÈ­Á¦¸ñ</b></th>
-	<th><b>½Ã³ñ½Ã½º</b></th>
-	<th><b>Àå¸£</b></th>
-	<th><b>°³ºÀ³âµµ</b></th>
-	<th><b>ÆòÁ¡</b></th>
-	<th><b>°ø½ÄÈ¨ÆäÀÌÁö</b></th>
-	<th><b>»çÁø</b></th>
+	<th><b>ì˜í™”ì œëª©</b></th>
+	<th><b>ê°œë´‰ë…„ë„</b></th>
+	<th><b>ì‹œë†‰ì‹œìŠ¤</b></th>
+	<th><b>ìž¥ë¥´</b></th>
+	<th><b>ê³µì‹í™ˆíŽ˜ì´ì§€</b></th>
+	<th><b>ì‚¬ì§„</b></th>
+	<th><b>í‰ì </b></th>
 </tr>
 </thead>
 <tbody>
@@ -43,28 +43,28 @@ try{
 		rowCount++;
 %>
 <tr>
-	<td><%=result.getString(1) %></td>
 	<td><%=result.getString(2) %></td>
 	<td><%=result.getString(3) %></td>
-	<td><%=result.getInt(4) %></td>
-	<td><%=result.getInt(5) %></td>
+	<td><%=result.getString(4) %></td>
+	<td><%=result.getString(5) %></td>
 	<td><%=result.getString(6) %></td>
 	<td><%=result.getString(7) %></td>
+	<td><%=result.getString(8) %></td>	
 </tr>
 </tbody>
 <%
 	}
 if(rowCount == 0)
 {
-	out.println("Á¶È¸µÈ °á°ú°¡ ¾ø½À´Ï´Ù.");
+	out.println("ì¡°íšŒëœ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
 }
 else
 {
-	out.println("Á¶È¸µÈ °á°ú°¡"+rowCount+"°Ç ÀÔ´Ï´Ù.");
+	out.println("ì¡°íšŒëœ ê²°ê³¼ê°€"+rowCount+"ê±´ ìž…ë‹ˆë‹¤.");
 }
 	result.close();
 }catch(Exception e){
-	out.println("µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.");
+	out.println("ë°ì´í„°ë² ì´ìŠ¤ ì ‘ì†ì— ë¬¸ì œê°€ ìžˆìŠµë‹ˆë‹¤.");
 	out.println(e.toString());
 	e.printStackTrace();
 }

@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¿µÈ­ °Ë»ö</title>
+<meta charset="utf-8">
+<title>ì˜í™” ê²€ìƒ‰</title>
+<script type ="text/javascript" src="http://code.jquery.com/jquery-2.0.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#title").keyup(function(){
+			$.get("suggest.jsp", // url
+					{title : $("#title").val()}, // param
+					function(data){viewData(data)}	);			
+		});//keyup
+		
+		function viewData(data){
+			data = $.trim(data);
+			var result = data.split(',');
+			
+			var html = '';
+			for(var i = 0; i<result.length; i++){
+				html+= "<a href=\"javascript:select('"+result[i]+"')\">" 
+					+result[i] +"<br>";
+			}
+			$('#suggest').html(html).show(); // chain
+		}// viewData
+	});
+</script>
 </head>
 <body>
-<h2>¿µÈ­ °Ë»ö</h2>
-<h3>Á¶È¸ÇÒ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä</h3>
-<form method="post" name="movie" action="searchmovie.jsp">
-ÀÌ¸§ : <input type="text" name="movietitle">
-<input type="submit" value="º¸³»±â">
+<h2>ì˜í™” ê²€ìƒ‰</h2>
+<h3>ì¡°íšŒí•  ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”</h3>
+<form action="searchmovie.jsp" method="get">
+<label>ì´ë¦„ :</label><input id="title" type="text" name="movietitle" size="20">
+<input type="submit" value="ë³´ë‚´ê¸°" id="btn">
 </form>
+<div id="suggest"></div>
 </body>
 </html>
