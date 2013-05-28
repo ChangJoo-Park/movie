@@ -22,6 +22,7 @@ $('.radio input').click(function(){
 	
 	
 });
-$('.radio ').click(function(){
-	$(this).addClass("selected");
+$('input').click(function(){
+	$('input:not(:checked)').parent().removeClass("selected");
+	$('input:checked').parent().addClass("selected");
 });

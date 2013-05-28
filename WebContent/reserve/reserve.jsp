@@ -32,7 +32,7 @@
 		<%
 			for(MovieEntity movie : movieList){	
 		%>
-			<li><label class="radio" for="movie_<%=movie.getId()%>"><input type="radio" id="movie_<%=movie.getId()%>" name = movie/><%= movie.getTitle() %></label></li>
+			<li><label class="radio" for="movie_<%=movie.getId()%>"><input type="radio" id="movie_<%=movie.getId()%>" name = movie value = '<%= movie.getTitle() %>'/><%= movie.getTitle() %></label></li>
 		<%
 			}
 		%>
@@ -45,7 +45,7 @@
 		<%
 			for(TheaterEntity theater : theaterList){
 		%>
-			<li><label class="radio" for="theater_<%=theater.getTheater_id()%>"><input type="radio" id="movie_<%=theater.getTheater_id()%>" name = "theater"/><%= theater.getTheater_name() %></label></li>
+			<li><label class="radio" for="theater_<%=theater.getTheater_id()%>"><input type="radio" id="theater_<%=theater.getTheater_id()%>" name = "theater" value="<%= theater.getTheater_name() %>"/><%= theater.getTheater_name() %></label></li>
 		<%	
 			}
 		%>
