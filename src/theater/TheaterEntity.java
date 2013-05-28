@@ -4,7 +4,13 @@ public class TheaterEntity {
 	private int theater_id;
 	private String theater_name;
 	private String address;
-	private String theater_room_id;
+	private String theater_room_seat_id;
+	public String getTheater_room_seat_id() {
+		return theater_room_seat_id;
+	}
+	public void setTheater_room_seat_id(String theater_room_seat_id) {
+		this.theater_room_seat_id = theater_room_seat_id;
+	}
 	public int getTheater_id() {
 		return theater_id;
 	}
@@ -22,12 +28,6 @@ public class TheaterEntity {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public String getTheater_room_id() {
-		return theater_room_id;
-	}
-	public void setTheater_room_id(String theater_room_id) {
-		this.theater_room_id = theater_room_id;
 	}
 	
 	

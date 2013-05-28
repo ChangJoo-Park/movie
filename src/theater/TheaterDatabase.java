@@ -70,7 +70,7 @@ public class TheaterDatabase {
 				theater.setTheater_id(rs.getInt("THEATER_ID"));
 				theater.setTheater_name(rs.getString("THEATER_NAME"));
 				theater.setAddress(rs.getString("ADDRESS"));
-				theater.setTheater_room_id(rs.getString("THEATER_ROOM_ID"));
+				theater.setTheater_room_seat_id(rs.getString("THEATER_ROOM_SEAT_ID"));
 				
 				// ArrayList에 영화 정보 객체 TheaterEntity를 추가
 				list.add(theater);
@@ -96,7 +96,7 @@ public class TheaterDatabase {
 			theater.setTheater_id(rs.getInt("THEATER_ID"));
 			theater.setTheater_name(rs.getString("THEATER_NAME"));
 			theater.setAddress(rs.getString("ADDRESS"));
-			theater.setTheater_room_id(rs.getString("THEATER_ROOM_ID"));
+			theater.setTheater_room_seat_id(rs.getString("THEATER_ROOM_SEAT_ID"));
 			
 			rs.close();
 		}catch(Exception e){
@@ -116,7 +116,7 @@ public class TheaterDatabase {
 			pstmt.setInt(1, theater.getTheater_id());
 			pstmt.setString(2, theater.getTheater_name());
 			pstmt.setString(3, theater.getAddress());
-			pstmt.setString(4, theater.getTheater_room_id());
+			pstmt.setString(4, theater.getTheater_room_seat_id());
 			
 			
 			pstmt.executeUpdate();
@@ -132,14 +132,14 @@ public class TheaterDatabase {
 	public boolean updateDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "update THEATER SET THEATER_NAME=?,ADDRESS=?,THEATER_ROOM_ID=? where THEATER_ID=?";
+		String SQL = "update THEATER SET THEATER_NAME=?,ADDRESS=?,THEATER_ROOM_SEAT_ID=? where THEATER_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			
 			pstmt.setInt(1, theater.getTheater_id());
 			pstmt.setString(2, theater.getTheater_name());
 			pstmt.setString(3, theater.getAddress());
-			pstmt.setString(4, theater.getTheater_room_id());
+			pstmt.setString(4, theater.getTheater_room_seat_id());
 			
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
