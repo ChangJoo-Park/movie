@@ -47,7 +47,7 @@
 			<%
 				for(TheaterEntity theater : theaterList){
 			%>
-				<li><label class="radio" for="theater_<%=theater.getTheater_id()%>"><input type="radio" id="theater_<%=theater.getTheater_id()%>" name = "theater" value="<%= theater.getTheater_name() %>"/><%= theater.getTheater_name() %></label></li>
+				<li><label class="radio" for="theater_<%=theater.getTheater_id()%>"><input type="radio" id="theater_<%=theater.getTheater_id() %>" name = "theater" value="<%= theater.getTheater_name() %>"/><%= theater.getTheater_name() %></label></li>
 			<%	
 				}
 			%>
@@ -125,6 +125,19 @@
 			}
 			$("#reservation").html(html).slideDown();
 		}// viewData
+		// 영화관 선택 시 관 출력
+		$(".radio input[name='theater']").click(function(){
+			
+			// 영화관 정보를 jsp에 파라미터로 전달해서 그 영화관에 해당하는 관의 리스트를 출력함
+			$.get("getMovie.jsp", // url
+					{theater: $(".radio input[name='theater']:checked").val()}, // param
+					function(data){viewTheater(data)});
+		});// 영화관 클릭
+		function viewTheater(data){
+			data = $.trim(data);
+			var result = data.split(",");
+			var html = '';
+		}
 	});
 	</script>
 </body>

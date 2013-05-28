@@ -168,4 +168,34 @@ public class TheaterDatabase {
 		}
 		return success;
 	}
+	public int getTheaterRoomDB(String theater_name){
+		// 영화관 이름을 통해서 관의 정보를 가져오려고 하는중
+		connect();
+		// 영화관 이름으로 영화관 정보를 얻어옴 일단은 전체 다 가져오는거로
+		String SQL = "select * from THEATER where THEATER_NAME = ?";
+		int theater_id = 0;
+		try{
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1,theater_name);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			// 영화관 아이디를 받음 (잘 실행됨)
+			theater_id = rs.getInt("THEATER_ID");
+			// 영화관 아이디를 가지고 ROOM_SEAT를 접근할수가 없는 문제가..??????
+			// 어떻게 쿼리를 짜야하나요
+			/**
+			SQL = "select ROOM_NUM from ROOM_SEAT where THEATER_ID = ?";
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setInt(1, theater_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			* */
+			rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			disconnect();
+		}
+		return theater_id;
+	}
 }

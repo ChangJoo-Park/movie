@@ -3,22 +3,19 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.*" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
+<jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
 <%
-	String movie 	= request.getParameter("movie");  
-	String theater	= request.getParameter("theater");
-	String room 	= request.getParameter("room");
-	String date 	= request.getParameter("date"); 
-	String time 	= request.getParameter("time");
-
+	String theater	= request.getParameter("theater"); // 넘어온 영화관이름
+	System.out.println(theater);
+	int theater_id = theaterdb.getTheaterRoomDB(theater);
+	System.out.println(theater_id);
 	List<String> list = new ArrayList<String>();
-	list.add(movie);
-	list.add(theater);
-	list.add(room);
-	list.add(date);
-	list.add(time);	
+
+	
 	// 개행문자 제거
 	for(String listItem : list){
 		listItem.replaceAll("\n", "");
@@ -30,4 +27,8 @@
 		out.println(list.get(i)+",");
 	}
 	
+%>
+<%
+	ArrayList<TheaterEntity>theaterList = theaterdb.getTheaterList();
+
 %>
