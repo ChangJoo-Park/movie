@@ -16,7 +16,10 @@ div{
 }
 .reserve_time{
 }
-
+.result{
+	border-style: solid;
+	border-color: black;
+}
 
 label:hover, label:active, input:hover+label, input:active+label {
 	
@@ -25,4 +28,7 @@ label:hover, label:active, input:hover+label, input:active+label {
 .selected{
 	background: #b2362a;
 	color: white;
+}
+.hide{
+	display: none;
 }

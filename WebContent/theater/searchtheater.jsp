@@ -28,7 +28,7 @@ try{
 <table>
 <thead>
 <tr>
-	<th><b>이름</th>
+	<th><b>이름</b></th>
 	<th><b>주소</b></th>
 	<th><b>관</b></th>
 	

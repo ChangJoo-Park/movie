@@ -8,7 +8,7 @@
 	request.setCharacterEncoding("utf-8");
 	String title = request.getParameter("title");
 	title = title.toUpperCase();
-	List list = new ArrayList();
+	List<String> list = new ArrayList<String>();
 	
 	Connection con = null;
 	PreparedStatement ps = null;
