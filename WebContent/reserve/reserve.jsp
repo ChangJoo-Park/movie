@@ -43,7 +43,7 @@
 	
 			<div class="reserve_theater span3">	
 			<h2 class="text-center">극장선택</h2>
-			<ul class="nav">
+			<ul class="nav list" id="theater_list">
 			<%
 				for(TheaterEntity theater : theaterList){
 			%>
@@ -56,14 +56,7 @@
 			
 			<div class="reserve_room span3 ">
 			<h2 class="text-center">관 선택</h2>
-			<label class="radio" for="room_1"><input type=radio id="room_1" name=room value="1관">1관</label>
-			<label class="radio" for="room_2"><input type=radio id="room_2" name=room value="2관">2관</label>
-			<label class="radio" for="room_3"><input type=radio id="room_3" name=room value="3관">3관</label>
-			<label class="radio" for="room_4"><input type=radio id="room_4" name=room value="4관">4관</label>
-			<label class="radio" for="room_5"><input type=radio id="room_5" name=room value="5관">5관</label>
-			<label class="radio" for="room_6"><input type=radio id="room_6" name=room value="6관">6관</label>
-			<label class="radio" for="room_7"><input type=radio id="room_7" name=room value="7관">7관</label>
-			<label class="radio" for="room_8"><input type=radio id="room_8" name=room value="8관">8관</label>
+			<ul id="room_list"></ul>
 			</div>
 			<div class="reserve_date span3">
 			<h2 class="text-center">날짜 선택</h2>
@@ -136,7 +129,15 @@
 		function viewTheater(data){
 			data = $.trim(data);
 			var result = data.split(",");
-			var html = '';
+			var html = "";
+			for(var i = 0 ; i<result.length; i++){
+				result[i].replace('\n','');
+				result[i].replace('\r','');
+				result[i].replace(',','');
+				html += "<li>"+result[i]+"관"+"</li>";
+			}
+			alert(html);
+			$("#room_list").append(html);
 		}
 	});
 	</script>

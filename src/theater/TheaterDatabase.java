@@ -70,8 +70,6 @@ public class TheaterDatabase {
 				theater.setTheater_id(rs.getInt("THEATER_ID"));
 				theater.setTheater_name(rs.getString("THEATER_NAME"));
 				theater.setAddress(rs.getString("ADDRESS"));
-				theater.setTheater_room_seat_id(rs.getString("THEATER_ROOM_SEAT_ID"));
-				
 				// ArrayList에 영화 정보 객체 TheaterEntity를 추가
 				list.add(theater);
 			}
@@ -96,7 +94,6 @@ public class TheaterDatabase {
 			theater.setTheater_id(rs.getInt("THEATER_ID"));
 			theater.setTheater_name(rs.getString("THEATER_NAME"));
 			theater.setAddress(rs.getString("ADDRESS"));
-			theater.setTheater_room_seat_id(rs.getString("THEATER_ROOM_SEAT_ID"));
 			
 			rs.close();
 		}catch(Exception e){
@@ -109,14 +106,13 @@ public class TheaterDatabase {
 	public boolean insertDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "insert into THEATER values(THEATER_ID.nextval,?,?,?)";
+		String SQL = "insert into THEATER values(THEATER_ID.nextval,?,?)";
 		try{
 			pstmt = con.prepareStatement(SQL);
 	
 			pstmt.setInt(1, theater.getTheater_id());
 			pstmt.setString(2, theater.getTheater_name());
 			pstmt.setString(3, theater.getAddress());
-			pstmt.setString(4, theater.getTheater_room_seat_id());
 			
 			
 			pstmt.executeUpdate();
@@ -132,14 +128,13 @@ public class TheaterDatabase {
 	public boolean updateDB(TheaterEntity theater){
 		boolean success = false;
 		connect();
-		String SQL = "update THEATER SET THEATER_NAME=?,ADDRESS=?,THEATER_ROOM_SEAT_ID=? where THEATER_ID=?";
+		String SQL = "update THEATER SET THEATER_NAME=?,ADDRESS=? where THEATER_ID=?";
 		try{
 			pstmt = con.prepareStatement(SQL);
 			
 			pstmt.setInt(1, theater.getTheater_id());
 			pstmt.setString(2, theater.getTheater_name());
 			pstmt.setString(3, theater.getAddress());
-			pstmt.setString(4, theater.getTheater_room_seat_id());
 			
 			int rowUdt = pstmt.executeUpdate(); 
 			if(rowUdt == 1 ) success = true;
@@ -168,7 +163,8 @@ public class TheaterDatabase {
 		}
 		return success;
 	}
-	public int getTheaterRoomDB(String theater_name){
+	public ArrayList<Integer> getTheaterRoomDB(String theater_name){
+		ArrayList<Integer>list = new ArrayList<Integer>();
 		// 영화관 이름을 통해서 관의 정보를 가져오려고 하는중
 		connect();
 		// 영화관 이름으로 영화관 정보를 얻어옴 일단은 전체 다 가져오는거로
@@ -181,21 +177,23 @@ public class TheaterDatabase {
 			rs.next();
 			// 영화관 아이디를 받음 (잘 실행됨)
 			theater_id = rs.getInt("THEATER_ID");
-			// 영화관 아이디를 가지고 ROOM_SEAT를 접근할수가 없는 문제가..??????
-			// 어떻게 쿼리를 짜야하나요
-			/**
-			SQL = "select ROOM_NUM from ROOM_SEAT where THEATER_ID = ?";
+			// 영화관의 아이디를 이용해서 가지고 있는 관의 내용을 받아온다.
+			SQL = "select ROOM_NUMBER from THEATER_ROOM where THEATER_ID = ?";
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setInt(1, theater_id);
 			rs = pstmt.executeQuery();
-			rs.next();
-			* */
+			while(rs.next()){
+				// theater_id에 해당하는 관의 개수를 받아옴
+				int room  = 0;
+				room = rs.getInt("ROOM_NUMBER");
+				list.add(room);
+			}
 			rs.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			disconnect();
 		}
-		return theater_id;
+		return list;
 	}
 }

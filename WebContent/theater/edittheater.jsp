@@ -26,7 +26,6 @@
 		
 		theater_name=theater.getTheater_name();
 		address=theater.getAddress();
-		theater_room_id=theater.getTheater_room_id();
 		
 		headline = "수정 삭제";	
 	};

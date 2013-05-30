@@ -20,8 +20,6 @@ if(counter > 0 ){
 <tr>
 	<th><b>이름</b></th>
 	<th><b>주소</b></th>
-	<th><b>관</b></th>
-	
 	
 </tr>
 <%
@@ -30,8 +28,7 @@ if(counter > 0 ){
 <tr>
 	<td><%= theater.getTheater_name()%><a href="edittheater.jsp?id=<%=theater.getTheater_id()%>">수정</a></td>
 	<td><%= theater.getAddress()%></td>
-	<td><%= theater.getTheater_room_id() %></td>
-	
+
 		
 </tr>
 </table>

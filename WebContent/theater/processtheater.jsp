@@ -18,8 +18,7 @@
 		int idnum = Integer.parseInt(theater_id);
 		String location = request.getParameter("theater_name");
 		String address = request.getParameter("address");
-		String room_num = request.getParameter("theater_room_id");
-		
+	
 
 		if(menu.equals("delete")){
 			theaterdb.deleteDB(idnum);
@@ -34,7 +33,6 @@
 %>
 	<jsp:setProperty property="theater_name" name="theater"/>
 	<jsp:setProperty property="address" name="theater"/>
-	<jsp:setProperty property="theater_room_id" name="theater"/>
 	
 	
 <%
