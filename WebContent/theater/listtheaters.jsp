@@ -16,28 +16,25 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <hr><p>조회된 극장은 <%= counter  %> 개 입니다.</p><hr>
-<table>
+<table border=1>
 <tr>
 	<th><b>이름</b></th>
 	<th><b>주소</b></th>
-	<th><b>관</b></th>
-	
 	
 </tr>
 <%
 	for(TheaterEntity theater : list){
 %>
 <tr>
-	<td><%= theater.getTheater_name()%><a href="edittheater.jsp?id=<%=theater.getTheater_id()%>">수정</a></td>
-	<td><%= theater.getAddress()%></td>
-	<td><%= theater.getTheater_room_id() %></td>
-	
-		
+	<td align=center><%= theater.getTheater_name()%><a href="edittheater.jsp?id=<%=theater.getTheater_id()%>">수정</a></td>
+	<td align=center><%= theater.getAddress()%></td>
 </tr>
-</table>
+
 <%
 	}
-	
+%>
+	</table>
+	<%
 }else{
 %>
 	<p>등록된 극장이 하나도 없습니다.</p>

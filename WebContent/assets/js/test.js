@@ -35,5 +35,3 @@ $('input').click(function(){
 	$('input:checked').parent().addClass("selected");
 	$(".reserve_result").slideDown().show();
 });
-
-

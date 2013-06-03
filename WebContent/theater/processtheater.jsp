@@ -8,7 +8,8 @@
 </head>
 <body>
 <jsp:useBean id="theater" class="theater.TheaterEntity" scope="page"></jsp:useBean>
-<jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>
+<jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>'
+
 <%
 	request.setCharacterEncoding("euc-kr");
 	// menu 저장(등록, 수정, 삭제)
@@ -16,10 +17,9 @@
 	if(menu.equals("delete") || menu.equals("update")){
 		String theater_id = request.getParameter("id");
 		int idnum = Integer.parseInt(theater_id);
-		String location = request.getParameter("theater_name");
+		String theater_name = request.getParameter("theater_name");
 		String address = request.getParameter("address");
-		String room_num = request.getParameter("theater_room_id");
-		
+	
 
 		if(menu.equals("delete")){
 			theaterdb.deleteDB(idnum);
@@ -34,11 +34,10 @@
 %>
 	<jsp:setProperty property="theater_name" name="theater"/>
 	<jsp:setProperty property="address" name="theater"/>
-	<jsp:setProperty property="theater_room_id" name="theater"/>
 	
 	
 <%
-		theaterdb.insertDB(theater);
+		theaterdb.setTheaterRoomDB(theater);
 		response.sendRedirect("listtheaters.jsp");
 	}
 	

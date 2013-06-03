@@ -11,8 +11,6 @@
 	request.setCharacterEncoding("euc-kr");
 	String	theater_name	=	"";
 	String  address     =   "";
-	String	theater_room_id	=	"";
-	
 	
 	String	headline = "등록";
 
@@ -22,11 +20,9 @@
 		// 등록이 아닌 경우 출력을 위해 각 필드 내용을 저장
 		int idnum = Integer.parseInt(theater_id);
 		TheaterDatabase theaterdb = new TheaterDatabase();
-		TheaterEntity theater	= theaterdb.getTheater(idnum);
-		
-		theater_name=theater.getTheater_name();
+		TheaterEntity theater = theaterdb.getTheater(idnum);
+		theater_name = theater.getTheater_name();
 		address=theater.getAddress();
-		theater_room_id=theater.getTheater_room_id();
 		
 		headline = "수정 삭제";	
 	};
@@ -37,11 +33,11 @@
 <input type=hidden name="menu" value="insert">
 <!-- 수정, 삭제를 위한 parameter 전송 -->
 <input type=hidden name="id" value="<%= theater_id %>">
-<table>
+<table border="1">
 <tr>
-<td>이름 : <input type=text name=theater_name value="<%= theater_name %>"></td>
-<td>주소 : <input type=text name=address value="<%= address %>"/></td>
-<td>관 : <input type=text name=theater_room_id value="<%= theater_room_id %>"></td>
+<td align="center">이름 : <input type=text name=theater_name value="<%= theater_name %>"></td>
+<td align="center">주소 : <input type=text name=address value="<%= address %>"/></td>
+
 
 
 </tr>

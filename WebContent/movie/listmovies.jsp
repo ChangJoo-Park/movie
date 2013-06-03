@@ -16,7 +16,7 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <hr><p>조회된 영화는 <%= counter  %> 개 입니다.</p><hr>
-<table>
+<table border=1>
 <tr>
 	<th><b>영화제목</b></th>
 	<th><b>시놉시스</b></th>
@@ -31,14 +31,14 @@ if(counter > 0 ){
 	for(MovieEntity movie : list){
 %>
 <tr>
-	<td><%= movie.getTitle() %><a href="editmovie.jsp?id=<%=movie.getId()%>">수정</a></td>
-	<td><%= movie.getDescription() %></td>
-	<td><%= movie.getGenre() %></td>
-	<td><%= movie.getYear() %></td>
-	<td><%= movie.getRate() %></td>
-	<td><a href="<%= movie.getOfficialSite() %>">공식홈페이지</a></td>
-	<td><img src="<%= movie.getPhoto() %>"/></td>
-	<td><%= movie.getPlay_time() %></td>
+	<td align="center"><%= movie.getTitle() %><a href="editmovie.jsp?id=<%=movie.getId()%>">수정</a></td>
+	<td align="center"><%= movie.getDescription() %></td>
+	<td align="center"><%= movie.getGenre() %></td>
+	<td align="center"><%= movie.getYear() %></td>
+	<td align="center"><%= movie.getRate() %></td>
+	<td align="center"><a href="<%= movie.getOfficialSite() %>">공식홈페이지</a></td>
+	<td align="center"><img src="<%= movie.getPhoto() %>"/></td>
+	<td align="center"><%= movie.getPlay_time() %></td>
 </tr>
 </table>
 <%
