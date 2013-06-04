@@ -56,7 +56,7 @@
 			
 			<div class="reserve_room span3 ">
 			<h2 class="text-center">관 선택</h2>
-			<ul id="room_list"></ul>
+			<div id="room_list"></div>
 			</div>
 			<div class="reserve_date span3">
 			<h2 class="text-center">날짜 선택</h2>
@@ -124,20 +124,24 @@
 			// 영화관 정보를 jsp에 파라미터로 전달해서 그 영화관에 해당하는 관의 리스트를 출력함
 			$.get("getMovie.jsp", // url
 					{theater: $(".radio input[name='theater']:checked").val()}, // param
-					function(data){viewTheater(data)});
+					function(data){
+						viewTheater(data);
+						$("input[name='room']").click(function(){
+							alert($("input[name='room']:checked + label").text());
+						});
+					});
 		});// 영화관 클릭
 		function viewTheater(data){
 			data = $.trim(data);
 			var result = data.split(",");
 			var html = "";
-			for(var i = 0 ; i<result.length; i++){
-				result[i].replace('\n','');
-				result[i].replace('\r','');
-				result[i].replace(',','');
-				html += "<li>"+result[i]+"관"+"</li>";
+			
+			for(var i = 0 ; i<result.length-1; i++){
+				html += "<input type='radio' id='room_"+result[i]+"' name='room'/>"
+						+"<label class='radio' for='room_"+result[i]+"'>"
+						+result[i]+"관"+"</label>";
 			}
-			alert(html);
-			$("#room_list").append(html);
+			$("#room_list").html(html);
 		}
 	});
 	</script>

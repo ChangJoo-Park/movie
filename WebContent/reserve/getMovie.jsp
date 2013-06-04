@@ -18,12 +18,13 @@
 	// 받아온 Integer 리스트를 String으로 변경
 	for(int i = 0 ; i<list.size(); i++){
 		strList.add(list.get(i).toString());
-		System.out.println(strList.get(i)+"관");
+		System.out.print(strList.get(i)+"관");
 	}
 	
 	// 개행문자 제거
 	for(int i = 0 ; i<strList.size(); i++){
-		out.println(list.get(i).toString()+",");
+		out.print(list.get(i).toString()+",");
+		
 	}	
 %>
 
