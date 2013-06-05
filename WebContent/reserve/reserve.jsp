@@ -62,11 +62,16 @@
 			<div id="seat_list"></div>
 			<input type='button' id='seatOK' value='선택완료'/>
 			</div>
-			<div class="reserve_date span3">
+			<div class="reserve_date span3 hide">
 			<h2 class="text-center">날짜 선택</h2>
+			<p>날짜 : <input type="text" id="datepicker" placeholder="클릭하세요"/>
+			<input type='button' id='dateOK' value='선택완료'/>
+			
+			</p>
+			
 			</div>
 	
-			<div class="reserve_time span3">
+			<div class="reserve_time span3 hide">
 			<h2 class="text-center">시간 선택</h2>
 			<label class="radio" for="time_1"><input type=radio id="time_1" name=time value="오전9시">9:00</label>
 			<label class="radio" for="time_2"><input type=radio id="time_2" name=time value="오전10시">10:00</label>
@@ -81,12 +86,28 @@
 		</div>
 		<div class="span12 result hide reserve_result">
 				<h2 class="text-center">예매 내용</h2>
-				<div class="span2" id="movie_name">영화를 선택하세요</div>
-				<div class="span2" id="movie_theater">극장을 선택하세요</div>
-				<div class="span2" id="movie_room">관을 선택하세요</div>
-				<div class="span2" id="movie_seat">좌석을 선택하세요</div>
-				<div class="span2" id="movie_date">날짜를 선택하세요</div>
-				<div class="span2" id="movie_time">시간을 선택하세요</div>		
+				<table>
+				<thead>
+					<tr>
+						<th>영화명</th>
+						<th>극장명</th>
+						<th>관</th>
+						<th>좌석</th>
+						<th>날짜</th>
+						<th>시간</th>		
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td id="movie_name"></td>
+						<td id="movie_theater"></td>
+						<td id="movie_room"></td>
+						<td id="movie_seat"></td>
+						<td id="movie_date"></td>
+						<td id="movie_time"></td>
+					</tr>
+				</tbody>
+				</table>
 			<input type="button" id="reserve" value="예매하기">
 		</div>
 	</form>
@@ -96,6 +117,7 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="../assets/js/bootstrap.min.js"></script>
 	<script src="../assets/js/test.js" charset="UTF-8"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	
 	<!--  ajax로 결과 출력 -->
 	<script type="text/javascript">
@@ -106,6 +128,7 @@
 					{movie: $("#movie_name").text(),
 					 theater: $("#movie_theater").text(),
 					 room: $("#movie_room").text(),
+					 seat: $("#movie_seat").text(),
 					 date: $("#movie_date").text(),
 					 time: $("#movie_time").text()}, // param
 					function(data){viewData(data);}	);			
@@ -167,6 +190,28 @@
 			$("#seat_list").html(html);
 		}
 	});
+	jQuery(function($){
+		 $.datepicker.regional['ko'] = {
+		  closeText: '닫기',
+		  prevText: '이전',
+		  nextText: '다음',
+		  currentText: '오늘',
+		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+		  dayNames: ['일','월','화','수','목','금','토'],
+		  dayNamesShort: ['일','월','화','수','목','금','토'],
+		  dayNamesMin: ['일','월','화','수','목','금','토'],
+		  weekHeader: 'Wk',
+		  dateFormat: 'yy-mm-dd',
+		  firstDay: 0,
+		  isRTL: false,
+		  showMonthAfterYear: true,
+		  yearSuffix: ''};
+		 $.datepicker.setDefaults($.datepicker.regional['ko']);
+
+		 $('#datepicker').datepicker(); 
+		});
+	
 	</script>
 
 </body>

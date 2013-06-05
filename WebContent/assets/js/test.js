@@ -47,9 +47,15 @@ $("#seatOK").click(function(){
 		var html_before = "총 "+seatNum+"개의 좌석 [";
 		var html_after = "] 이 선택되었습니다.";
 		alert(html_before+seat_string+html_after);
-		$("#movie_seat").text(seats.length+"개의 좌석"+seat_string);
+		$("#movie_seat").text(seats.length+"개의 좌석  : [ "+seat_string+" ]");
+		$(".reserve_date").removeClass("hide");
 	}else{
 		$("input[name='seat']").removeAttr('checked');
 	}
 	
+});
+
+$("#dateOK").click(function(){
+	$("#movie_date").text($("#datepicker").val());
+	$(".reserve_time").removeClass("hide");
 });
