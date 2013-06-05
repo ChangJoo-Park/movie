@@ -262,4 +262,40 @@ public class TheaterDatabase {
 		}
 		return success;
 	}
+	public ArrayList<SeatEntity> getSeatDB(String theater_name, int room_name) {
+		ArrayList<SeatEntity> list = new ArrayList<SeatEntity>();
+		// 영화관 이름을 통해서 관의 정보를 가져오려고 하는중
+		connect();
+		// 영화관 이름으로 영화관 정보를 얻어옴 일단은 전체 다 가져오는거로
+		String SQL = "select * from THEATER where THEATER_NAME = ?";
+		int theater_id = 0;
+		try {
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, theater_name);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			theater_id = rs.getInt("THEATER_ID");
+			// 영화관 아이디 받기 끝
+			
+			SQL = "select * from THEATER_SEAT where SEAT_THEATER_ID = ? AND SEAT_THEATER_ROOM_ID = ?";
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setInt(1, theater_id);
+			pstmt.setInt(2, room_name);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				SeatEntity seat = new SeatEntity();
+				seat.setSeatNum(rs.getInt("SEAT_NUM"));
+				seat.setIsSeatUse(rs.getInt("BOOL"));
+				list.add(seat);
+			}
+			
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disconnect();
+		}
+		return list;
+	}
+
 }

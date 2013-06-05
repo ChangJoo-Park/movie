@@ -54,9 +54,12 @@
 			</ul>
 			</div>
 			
-			<div class="reserve_room span3 ">
+			<div class="reserve_room span3 hide">
 			<h2 class="text-center">관 선택</h2>
 			<div id="room_list"></div>
+			</div>
+			<div class="reserve_seat span3 hide"><h2 class="text-center">좌석 선택</h2>
+			<div id="seat_list"></div>
 			</div>
 			<div class="reserve_date span3">
 			<h2 class="text-center">날짜 선택</h2>
@@ -127,7 +130,14 @@
 					function(data){
 						viewTheater(data);
 						$("input[name='room']").click(function(){
-							alert($("input[name='room']:checked + label").text());
+							var room = $("input[name='room']:checked + label").text();
+							$("#movie_room").html(room);
+							var theater = $("#movie_theater").text();
+							$.get("getSeat.jsp",
+								{theater: theater,room: room},
+								function(data){
+									viewSeat(data);
+							});			
 						});
 					});
 		});// 영화관 클릭
@@ -141,7 +151,18 @@
 						+"<label class='radio' for='room_"+result[i]+"'>"
 						+result[i]+"관"+"</label>";
 			}
+			$(".reserve_room").removeClass("hide");
 			$("#room_list").html(html);
+		}
+		function viewSeat(data){
+			data = $.trim(data);
+			var result = data.split(",");
+			var html = "";
+			for(var i = 0 ; i<result.length-1; i++){
+				html += "<input type='checkbox'/>" + result[i];
+			}
+			$(".reserve_seat").removeClass("hide");
+			$("#seat_list").html(html);
 		}
 	});
 	</script>

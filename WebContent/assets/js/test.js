@@ -19,6 +19,7 @@ $('.radio input').click(function(){
 	}
 	else if(flag==="room"){
 		room = $(this).val();
+		alert("dd");
 		$("#movie_room").text(room);
 	}
 	else if(flag==="date"){
