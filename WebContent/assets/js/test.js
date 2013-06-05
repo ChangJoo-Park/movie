@@ -19,7 +19,6 @@ $('.radio input').click(function(){
 	}
 	else if(flag==="room"){
 		room = $(this).val();
-		alert("dd");
 		$("#movie_room").text(room);
 	}
 	else if(flag==="date"){
@@ -32,7 +31,25 @@ $('.radio input').click(function(){
 	}
 });
 $('input').click(function(){
-	$('input:not(:checked)').parent().removeClass("selected");
-	$('input:checked').parent().addClass("selected");
 	$(".reserve_result").slideDown().show();
+});
+
+$("#seatOK").click(function(){
+	var seatNum = $("input[name='seat']:checked").size();
+	var seats = new Array();
+	var seat_string = "";
+	for(var i = 0 ; i<seatNum;i++){
+		seats.push($("input[name='seat']:checked")[i]);
+		seat_string += seats[i].value+ " ";
+	}
+	var answer = confirm("선택한 좌석이 "+seat_string+" 이 맞습니까?");
+	if(answer){
+		var html_before = "총 "+seatNum+"개의 좌석 [";
+		var html_after = "] 이 선택되었습니다.";
+		alert(html_before+seat_string+html_after);
+		$("#movie_seat").text(seats.length+"개의 좌석"+seat_string);
+	}else{
+		$("input[name='seat']").removeAttr('checked');
+	}
+	
 });

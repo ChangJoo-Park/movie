@@ -60,6 +60,7 @@
 			</div>
 			<div class="reserve_seat span3 hide"><h2 class="text-center">좌석 선택</h2>
 			<div id="seat_list"></div>
+			<input type='button' id='seatOK' value='선택완료'/>
 			</div>
 			<div class="reserve_date span3">
 			<h2 class="text-center">날짜 선택</h2>
@@ -83,6 +84,7 @@
 				<div class="span2" id="movie_name">영화를 선택하세요</div>
 				<div class="span2" id="movie_theater">극장을 선택하세요</div>
 				<div class="span2" id="movie_room">관을 선택하세요</div>
+				<div class="span2" id="movie_seat">좌석을 선택하세요</div>
 				<div class="span2" id="movie_date">날짜를 선택하세요</div>
 				<div class="span2" id="movie_time">시간을 선택하세요</div>		
 			<input type="button" id="reserve" value="예매하기">
@@ -137,7 +139,7 @@
 								{theater: theater,room: room},
 								function(data){
 									viewSeat(data);
-							});			
+							});
 						});
 					});
 		});// 영화관 클릭
@@ -159,12 +161,13 @@
 			var result = data.split(",");
 			var html = "";
 			for(var i = 0 ; i<result.length-1; i++){
-				html += "<input type='checkbox'/>" + result[i];
+				html += "<input type='checkbox' id='seat_"+result[i]+"'name='seat' value='"+result[i]+"'/>"+result[i];
 			}
 			$(".reserve_seat").removeClass("hide");
 			$("#seat_list").html(html);
 		}
 	});
 	</script>
+
 </body>
 </html>
