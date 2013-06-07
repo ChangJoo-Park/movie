@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<ul>
-<li>처음으로</li>
-<li>영화 목록</li>
-<li>예매하기</li>
-<li>로그인</li>
-</ul>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">영화예매</a>
+    <ul class="nav">
+      <li class="active"><a href="#">처음으로</a></li>
+      <li><a href="#">영화</a></li>
+      <li><a href="#">극장</a></li>
+      <li><a href="#">예매하기</a></li>
+      <li><a href="#">로그인</a></li>
+    </ul>
+  </div>
+</div>
