@@ -6,6 +6,8 @@
 <script src="assets/scripts/movieform.js"></script>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <%@ page import="java.util.ArrayList, movie.*" %>
 <%
 	request.setCharacterEncoding("euc-kr");

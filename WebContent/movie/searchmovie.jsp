@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <%@ page import="java.sql.*" %>
 <% request.setCharacterEncoding("utf-8"); %>
 <% 

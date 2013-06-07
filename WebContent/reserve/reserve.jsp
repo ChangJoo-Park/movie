@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
 	<%@ page import="java.util.ArrayList, movie.MovieEntity" %>
 	<%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
 	<jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>

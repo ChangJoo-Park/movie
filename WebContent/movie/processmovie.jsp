@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <jsp:useBean id="movie" class="movie.MovieEntity" scope="page"></jsp:useBean>
 <jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
 <%

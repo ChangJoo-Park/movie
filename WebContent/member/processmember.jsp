@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <jsp:useBean id="member" class="member.MemberEntity" scope="page"></jsp:useBean>
 <jsp:useBean id="memberdb" class="member.MemberDatabase" scope="page"></jsp:useBean>
 <%

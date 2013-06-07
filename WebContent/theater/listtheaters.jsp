@@ -5,6 +5,8 @@
 <title> 극장 리스트</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
 <h2>자바 빈즈 TheaterDatabase를 이용한 테이블 THEATER 조회</h2>
 <jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>

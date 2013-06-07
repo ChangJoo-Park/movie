@@ -5,6 +5,8 @@
 <title>영화 리스트</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <%@ page import="java.util.ArrayList, movie.MovieEntity" %>
 <h2>자바 빈즈 MovieDatabase를 이용한 테이블 MOVIE 조회</h2>
 <jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>

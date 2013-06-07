@@ -5,6 +5,8 @@
 <title>회원 리스트</title>
 </head>
 <body>
+	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
+
 <%@ page import="java.util.ArrayList, member.MemberEntity" %>
 <h2>자바 빈즈 MemberDatabase를 이용한 테이블 MEMBER 조회</h2>
 <jsp:useBean id="memberdb" class="member.MemberDatabase" scope="page"></jsp:useBean>

@@ -6,6 +6,7 @@
 <script src="assets/scripts/memberform.js"></script>
 </head>
 <body>
+<jsp:include page="../layouts/navigation.jsp"></jsp:include>
 <%@ page import="java.util.ArrayList, member.*" %>
 <%
 	request.setCharacterEncoding("euc-kr");
