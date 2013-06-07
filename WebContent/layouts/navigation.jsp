@@ -2,13 +2,13 @@
     pageEncoding="EUC-KR"%>
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">©╣х╜©╧╦е</a>
+    <a class="brand" href="#">Л≤│М≥■Л≤┬К╖╓</a>
     <ul class="nav">
-      <li class="active"><a href="#">цЁю╫ю╦╥н</a></li>
-      <li><a href="#">©╣х╜</a></li>
-      <li><a href="#">╠ьюЕ</a></li>
-      <li><a href="#">©╧╦его╠Б</a></li>
-      <li><a href="#">╥н╠вюн</a></li>
+      <li class="active"><a href="#">Л╡≤Л²▄Л°╪К║°</a></li>
+      <li><a href="#">Л≤│М≥■</a></li>
+      <li><a href="#">Й╥╧Л·╔</a></li>
+      <li><a href="#">Л≤┬К╖╓М∙≤Й╦╟</a></li>
+      <li><a href="#">К║°Й╥╦Л²╦</a></li>
     </ul>
   </div>
 </div>

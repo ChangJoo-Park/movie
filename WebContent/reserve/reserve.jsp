@@ -16,7 +16,7 @@
 	<jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
 	<jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>
 	<%
-		request.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");
 	
 		// 영화 목록 받기
 		ArrayList<MovieEntity>movieList = moviedb.getMovieList();

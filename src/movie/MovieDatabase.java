@@ -9,12 +9,12 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class MovieDatabase {
-	// µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á °ü·Ã º¯¼ö ¼±¾ğ
+	// ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²° ê´€ë ¨ ë³€ìˆ˜ ì„ ì–¸
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private DataSource ds = null;
 	
-	// µî·ÏÇÑ DBCP µ¥ÀÌÅÍ¼Ò½º¸¦ Ã£¾Æ ÀúÀåÇÏ´Â »ı¼ºÀÚ
+	// ë“±ë¡í•œ DBCP ë°ì´í„°ì†ŒìŠ¤ë¥¼ ì°¾ì•„ ì €ì¥í•˜ëŠ” ìƒì„±ì
 	public MovieDatabase(){
 		try{
 			InitialContext ctx = new InitialContext();
@@ -23,7 +23,7 @@ public class MovieDatabase {
 			e.printStackTrace();
 		}
 	}
-	// µ¥ÀÌÅÍ ¼Ò½º¸¦ ÅëÇØ µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á, Connection °´Ã¼¿¡ ÀúÀåÇÏ´Â ¸Ş¼Òµå
+	// ë°ì´í„° ì†ŒìŠ¤ë¥¼ í†µí•´ ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²°, Connection ê°ì²´ì— ì €ì¥í•˜ëŠ” ë©”ì†Œë“œ
 	public void connect(){
 		try{
 			con = ds.getConnection();
@@ -31,7 +31,7 @@ public class MovieDatabase {
 			e.printStackTrace();
 		}
 	}
-	// DB¿¬°á ÇØÁ¦ ¸Ş¼Òµå
+	// DBì—°ê²° í•´ì œ ë©”ì†Œë“œ
 	public void disconnect(){
 		if(pstmt != null){
 			try{
@@ -48,11 +48,11 @@ public class MovieDatabase {
 			}
 		}
 	}
-	// ¸ğµç ·¹ÄÚµå¸¦ ¹İÈ¯ÇÏ´Â ¸Ş¼Òµå
+	// ëª¨ë“  ë ˆì½”ë“œë¥¼ ë°˜í™˜í•˜ëŠ” ë©”ì†Œë“œ
 	public ArrayList<MovieEntity>getMovieList(){
 		connect();
-		// ÁúÀÇ °á°ú¸¦ ÀúÀåÇÒ ArrayList ¼±¾ğ
-		// ArrayList ³»ºÎ¿¡´Â ÇĞ»ıÁ¤º¸¸¦ ÀúÀåÇÑ MovieEntity°¡ »ğÀÔµÊ.
+		// ì§ˆì˜ ê²°ê³¼ë¥¼ ì €ì¥í•  ArrayList ì„ ì–¸
+		// ArrayList ë‚´ë¶€ì—ëŠ” í•™ìƒì •ë³´ë¥¼ ì €ì¥í•œ MovieEntityê°€ ì‚½ì…ë¨.
 		ArrayList<MovieEntity>list = new ArrayList<MovieEntity>();
 		
 		String SQL = "select * from MOVIE";
@@ -60,12 +60,12 @@ public class MovieDatabase {
 			pstmt = con.prepareStatement(SQL);
 			ResultSet rs = pstmt.executeQuery();
 			
-			// ResultSetÀÇ °á°ú¿¡¼­ ¸ğµç ÇàÀ» °¢°¢ÀÇ MovieEntity °´Ã¼¿¡ ÀúÀå
+			// ResultSetì˜ ê²°ê³¼ì—ì„œ ëª¨ë“  í–‰ì„ ê°ê°ì˜ MovieEntity ê°ì²´ì— ì €ì¥
 			while(rs.next()){
-				// ÇÑ ¿µÈ­ÀÇ Á¤º¸¸¦ ÀúÀåÇÒ ºóÁî °´Ã¼ »ı¼º
+				// í•œ ì˜í™”ì˜ ì •ë³´ë¥¼ ì €ì¥í•  ë¹ˆì¦ˆ ê°ì²´ ìƒì„±
 				MovieEntity movie = new MovieEntity();
 				
-				// ÇÑ ÇàÀÇ ¿µÈ­ Á¤º¸¸¦ ÀÚ¹ÙºóÁî °´Ã¼¿¡ ÀúÀå get~ ¾ÈÀÇ ¹®ÀÚ¿­Àº Ä®·³¸í°ú µ¿ÀÏÇÏ°Ô ÇØ¾ßÇÑ´Ù.
+				// í•œ í–‰ì˜ ì˜í™” ì •ë³´ë¥¼ ìë°”ë¹ˆì¦ˆ ê°ì²´ì— ì €ì¥ get~ ì•ˆì˜ ë¬¸ìì—´ì€ ì¹¼ëŸ¼ëª…ê³¼ ë™ì¼í•˜ê²Œ í•´ì•¼í•œë‹¤.
 				movie.setId(rs.getInt("MOVIE_ID"));
 				movie.setTitle(rs.getString("TITLE"));
 				movie.setYear(rs.getInt("YEAR"));
@@ -75,7 +75,7 @@ public class MovieDatabase {
 				movie.setRate(rs.getInt("RATE"));
 				movie.setPhoto(rs.getString("PHOTO"));
 				movie.setPlay_time(rs.getInt("PLAY_TIME"));
-				// ArrayList¿¡ ¿µÈ­ Á¤º¸ °´Ã¼ MovieEntity¸¦ Ãß°¡
+				// ArrayListì— ì˜í™” ì •ë³´ ê°ì²´ MovieEntityë¥¼ ì¶”ê°€
 				list.add(movie);
 			}
 			rs.close();
@@ -84,7 +84,7 @@ public class MovieDatabase {
 		}finally{
 			disconnect();
 		}
-		// ¿Ï¼ºµÈ ArrayList °´Ã¼¸¦ ¹İÈ¯
+		// ì™„ì„±ëœ ArrayList ê°ì²´ë¥¼ ë°˜í™˜
 		return list;
 	}
 	public MovieEntity getMovie(int id){

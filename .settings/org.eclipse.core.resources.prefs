@@ -1,3 +1,14 @@
 eclipse.preferences.version=1
+encoding//WebContent/assets/css/custom.css=UTF-8
 encoding//WebContent/assets/js/test.js=UTF-8
+encoding//WebContent/layouts/navigation.jsp=UTF-8
+encoding//WebContent/member/editmember.jsp=UTF-8
 encoding//WebContent/reserve/reserve.jsp=UTF-8
+encoding//src/member/MemberDatabase.java=UTF-8
+encoding//src/member/MemberEntity.java=UTF-8
+encoding//src/movie/MovieDatabase.java=UTF-8
+encoding//src/movie/MovieEntity.java=UTF-8
+encoding//src/movie/Test_JDBC_ORACLE.java=UTF-8
+encoding//src/theater/SeatEntity.java=UTF-8
+encoding//src/theater/TheaterDatabase.java=UTF-8
+encoding//src/theater/TheaterEntity.java=UTF-8

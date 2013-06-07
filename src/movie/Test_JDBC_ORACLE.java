@@ -24,7 +24,6 @@ public class Test_JDBC_ORACLE {
 		String id = "hotsun0428";
 		String pwd = "rudah0428";
 /**
- * ����� cafe24 �����ͺ��̽��� �ִ� oracle db�� MOVIE_TEST ���̺��� �̿���
  * MOVIE_TEST
  * title 		: String
  * description 	: String

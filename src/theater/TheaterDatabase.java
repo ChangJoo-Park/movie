@@ -9,12 +9,12 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class TheaterDatabase {
-	// µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á °ü·Ã º¯¼ö ¼±¾ğ
+	// ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²° ê´€ë ¨ ë³€ìˆ˜ ì„ ì–¸
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private DataSource ds = null;
 
-	// µî·ÏÇÑ DBCP µ¥ÀÌÅÍ¼Ò½º¸¦ Ã£¾Æ ÀúÀåÇÏ´Â »ı¼ºÀÚ
+	// ë“±ë¡í•œ DBCP ë°ì´í„°ì†ŒìŠ¤ë¥¼ ì°¾ì•„ ì €ì¥í•˜ëŠ” ìƒì„±ì
 	public TheaterDatabase() {
 		try {
 			InitialContext ctx = new InitialContext();
@@ -24,7 +24,7 @@ public class TheaterDatabase {
 		}
 	}
 
-	// µ¥ÀÌÅÍ ¼Ò½º¸¦ ÅëÇØ µ¥ÀÌÅÍº£ÀÌ½º ¿¬°á, Connection °´Ã¼¿¡ ÀúÀåÇÏ´Â ¸Ş¼Òµå
+	// ë°ì´í„° ì†ŒìŠ¤ë¥¼ í†µí•´ ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²°, Connection ê°ì²´ì— ì €ì¥í•˜ëŠ” ë©”ì†Œë“œ
 	public void connect() {
 		try {
 			con = ds.getConnection();
@@ -33,7 +33,7 @@ public class TheaterDatabase {
 		}
 	}
 
-	// DB¿¬°á ÇØÁ¦ ¸Ş¼Òµå
+	// DBì—°ê²° í•´ì œ ë©”ì†Œë“œ
 	public void disconnect() {
 		if (pstmt != null) {
 			try {
@@ -51,11 +51,11 @@ public class TheaterDatabase {
 		}
 	}
 
-	// ¸ğµç ·¹ÄÚµå¸¦ ¹İÈ¯ÇÏ´Â ¸Ş¼Òµå
+	// ëª¨ë“  ë ˆì½”ë“œë¥¼ ë°˜í™˜í•˜ëŠ” ë©”ì†Œë“œ
 	public ArrayList<TheaterEntity> getTheaterList() {
 		connect();
-		// ÁúÀÇ °á°ú¸¦ ÀúÀåÇÒ ArrayList ¼±¾ğ
-		// ArrayList ³»ºÎ¿¡´Â ÇĞ»ıÁ¤º¸¸¦ ÀúÀåÇÑ TheaterEntity°¡ »ğÀÔµÊ.
+		// ì§ˆì˜ ê²°ê³¼ë¥¼ ì €ì¥í•  ArrayList ì„ ì–¸
+		// ArrayList ë‚´ë¶€ì—ëŠ” í•™ìƒì •ë³´ë¥¼ ì €ì¥í•œ TheaterEntityê°€ ì‚½ì…ë¨.
 		ArrayList<TheaterEntity> list = new ArrayList<TheaterEntity>();
 
 		String SQL = "select * from THEATER";
@@ -63,17 +63,17 @@ public class TheaterDatabase {
 			pstmt = con.prepareStatement(SQL);
 			ResultSet rs = pstmt.executeQuery();
 
-			// ResultSetÀÇ °á°ú¿¡¼­ ¸ğµç ÇàÀ» °¢°¢ÀÇ TheaterEntity °´Ã¼¿¡ ÀúÀå
+			// ResultSetì˜ ê²°ê³¼ì—ì„œ ëª¨ë“  í–‰ì„ ê°ê°ì˜ TheaterEntity ê°ì²´ì— ì €ì¥
 			while (rs.next()) {
-				// ÇÑ ¿µÈ­ÀÇ Á¤º¸¸¦ ÀúÀåÇÒ ºóÁî °´Ã¼ »ı¼º
+				// í•œ ì˜í™”ì˜ ì •ë³´ë¥¼ ì €ì¥í•  ë¹ˆì¦ˆ ê°ì²´ ìƒì„±
 				TheaterEntity theater = new TheaterEntity();
 
-				// ÇÑ ÇàÀÇ ¿µÈ­ Á¤º¸¸¦ ÀÚ¹ÙºóÁî °´Ã¼¿¡ ÀúÀå get~ ¾ÈÀÇ ¹®ÀÚ¿­Àº Ä®·³¸í°ú µ¿ÀÏÇÏ°Ô ÇØ¾ßÇÑ´Ù.
+				// í•œ í–‰ì˜ ì˜í™” ì •ë³´ë¥¼ ìë°”ë¹ˆì¦ˆ ê°ì²´ì— ì €ì¥ get~ ì•ˆì˜ ë¬¸ìì—´ì€ ì¹¼ëŸ¼ëª…ê³¼ ë™ì¼í•˜ê²Œ í•´ì•¼í•œë‹¤.
 
 				theater.setTheater_id(rs.getInt("THEATER_ID"));
 				theater.setTheater_name(rs.getString("THEATER_NAME"));
 				theater.setAddress(rs.getString("ADDRESS"));
-				// ArrayList¿¡ ¿µÈ­ Á¤º¸ °´Ã¼ TheaterEntity¸¦ Ãß°¡
+				// ArrayListì— ì˜í™” ì •ë³´ ê°ì²´ TheaterEntityë¥¼ ì¶”ê°€
 				list.add(theater);
 			}
 			rs.close();
@@ -82,7 +82,7 @@ public class TheaterDatabase {
 		} finally {
 			disconnect();
 		}
-		// ¿Ï¼ºµÈ ArrayList °´Ã¼¸¦ ¹İÈ¯
+		// ì™„ì„±ëœ ArrayList ê°ì²´ë¥¼ ë°˜í™˜
 		return list;
 	}
 
@@ -172,9 +172,9 @@ public class TheaterDatabase {
 
 	public ArrayList<Integer> getTheaterRoomDB(String theater_name) {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		// ¿µÈ­°ü ÀÌ¸§À» ÅëÇØ¼­ °üÀÇ Á¤º¸¸¦ °¡Á®¿À·Á°í ÇÏ´ÂÁß
+		// ì˜í™”ê´€ ì´ë¦„ì„ í†µí•´ì„œ ê´€ì˜ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ë ¤ê³  í•˜ëŠ”ì¤‘
 		connect();
-		// ¿µÈ­°ü ÀÌ¸§À¸·Î ¿µÈ­°ü Á¤º¸¸¦ ¾ò¾î¿È ÀÏ´ÜÀº ÀüÃ¼ ´Ù °¡Á®¿À´Â°Å·Î
+		// ì˜í™”ê´€ ì´ë¦„ìœ¼ë¡œ ì˜í™”ê´€ ì •ë³´ë¥¼ ì–»ì–´ì˜´ ì¼ë‹¨ì€ ì „ì²´ ë‹¤ ê°€ì ¸ì˜¤ëŠ”ê±°ë¡œ
 		String SQL = "select * from THEATER where THEATER_NAME = ?";
 		int theater_id = 0;
 		try {
@@ -182,15 +182,15 @@ public class TheaterDatabase {
 			pstmt.setString(1, theater_name);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			// ¿µÈ­°ü ¾ÆÀÌµğ¸¦ ¹ŞÀ½ (Àß ½ÇÇàµÊ)
+			// ì˜í™”ê´€ ì•„ì´ë””ë¥¼ ë°›ìŒ (ì˜ ì‹¤í–‰ë¨)
 			theater_id = rs.getInt("THEATER_ID");
-			// ¿µÈ­°üÀÇ ¾ÆÀÌµğ¸¦ ÀÌ¿ëÇØ¼­ °¡Áö°í ÀÖ´Â °üÀÇ ³»¿ëÀ» ¹Ş¾Æ¿Â´Ù.
+			// ì˜í™”ê´€ì˜ ì•„ì´ë””ë¥¼ ì´ìš©í•´ì„œ ê°€ì§€ê³  ìˆëŠ” ê´€ì˜ ë‚´ìš©ì„ ë°›ì•„ì˜¨ë‹¤.
 			SQL = "select ROOM_NUMBER from THEATER_ROOM where THEATER_ID = ?";
 			pstmt = con.prepareStatement(SQL);
 			pstmt.setInt(1, theater_id);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				// theater_id¿¡ ÇØ´çÇÏ´Â °üÀÇ °³¼ö¸¦ ¹Ş¾Æ¿È
+				// theater_idì— í•´ë‹¹í•˜ëŠ” ê´€ì˜ ê°œìˆ˜ë¥¼ ë°›ì•„ì˜´
 				int room = 0;
 				room = rs.getInt("ROOM_NUMBER");
 				list.add(room);
@@ -212,8 +212,8 @@ public class TheaterDatabase {
 		String SQL = "insert into THEATER values(THEATER_ID.nextval,?,?)";
 		int theater_id = 0;
 		int room_id = 0;
-		int currentroom = 10; // ¸ğµç ±ØÀåÀÇ °ü ¼ö¸¦ 10°³·Î °¡Á¤
-							//(ÀÌ ÈÄ¿¡ ±ØÀåµî·Ï ÆäÀÌÁö¿¡¼­ °ü °³¼ö¸¦ ÀÔ·Â¹Ş°Ô ¼³Á¤ÇÒ ¿¹Á¤)
+		int currentroom = 10; // ëª¨ë“  ê·¹ì¥ì˜ ê´€ ìˆ˜ë¥¼ 10ê°œë¡œ ê°€ì •
+							//(ì´ í›„ì— ê·¹ì¥ë“±ë¡ í˜ì´ì§€ì—ì„œ ê´€ ê°œìˆ˜ë¥¼ ì…ë ¥ë°›ê²Œ ì„¤ì •í•  ì˜ˆì •)
 
 		try {
 			pstmt = con.prepareStatement(SQL);
@@ -227,9 +227,9 @@ public class TheaterDatabase {
 			rs.next();
 			theater_id = rs.getInt("THEATER_ID");
 
-			// ¿µÈ­°ü ¾ÆÀÌµğ¸¦ ¹ŞÀ½ (Àß ½ÇÇàµÊ)
+			// ì˜í™”ê´€ ì•„ì´ë””ë¥¼ ë°›ìŒ (ì˜ ì‹¤í–‰ë¨)
 
-			// ¿µÈ­°üÀÇ ¾ÆÀÌµğ¸¦ ÀÌ¿ëÇØ¼­ °¡Áö°í ÀÖ´Â °üÀÇ ³»¿ëÀ» ¹Ş¾Æ¿Â´Ù.
+			// ì˜í™”ê´€ì˜ ì•„ì´ë””ë¥¼ ì´ìš©í•´ì„œ ê°€ì§€ê³  ìˆëŠ” ê´€ì˜ ë‚´ìš©ì„ ë°›ì•„ì˜¨ë‹¤.
 			SQL = "insert into THEATER_ROOM values(THEATER_ROOM_ID.nextval,?,?)";
 			
 			pstmt = con.prepareStatement(SQL);
@@ -245,7 +245,7 @@ public class TheaterDatabase {
 			
 			
 			SQL="insert into THEATER_SEAT values(SEAT_ID.nextval,?,?,?,?)";
-			for(int i=1;i<11;i++){ // ¸ğµç °üÀÇ ÁÂ¼® °³¼ö¸¦ 10°³¶ó°í °¡Á¤
+			for(int i=1;i<11;i++){ // ëª¨ë“  ê´€ì˜ ì¢Œì„ ê°œìˆ˜ë¥¼ 10ê°œë¼ê³  ê°€ì •
 				pstmt=con.prepareStatement(SQL);
 				pstmt.setInt(1, i);
 				pstmt.setInt(2,0);
@@ -264,9 +264,9 @@ public class TheaterDatabase {
 	}
 	public ArrayList<SeatEntity> getSeatDB(String theater_name, int room_name) {
 		ArrayList<SeatEntity> list = new ArrayList<SeatEntity>();
-		// ¿µÈ­°ü ÀÌ¸§À» ÅëÇØ¼­ °üÀÇ Á¤º¸¸¦ °¡Á®¿À·Á°í ÇÏ´ÂÁß
+		// ì˜í™”ê´€ ì´ë¦„ì„ í†µí•´ì„œ ê´€ì˜ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ë ¤ê³  í•˜ëŠ”ì¤‘
 		connect();
-		// ¿µÈ­°ü ÀÌ¸§À¸·Î ¿µÈ­°ü Á¤º¸¸¦ ¾ò¾î¿È ÀÏ´ÜÀº ÀüÃ¼ ´Ù °¡Á®¿À´Â°Å·Î
+		// ì˜í™”ê´€ ì´ë¦„ìœ¼ë¡œ ì˜í™”ê´€ ì •ë³´ë¥¼ ì–»ì–´ì˜´ ì¼ë‹¨ì€ ì „ì²´ ë‹¤ ê°€ì ¸ì˜¤ëŠ”ê±°ë¡œ
 		String SQL = "select * from THEATER where THEATER_NAME = ?";
 		int theater_id = 0;
 		try {
@@ -275,7 +275,7 @@ public class TheaterDatabase {
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
 			theater_id = rs.getInt("THEATER_ID");
-			// ¿µÈ­°ü ¾ÆÀÌµğ ¹Ş±â ³¡
+			// ì˜í™”ê´€ ì•„ì´ë”” ë°›ê¸° ë
 			
 			SQL = "select * from THEATER_SEAT where SEAT_THEATER_ID = ? AND SEAT_THEATER_ROOM_ID = ?";
 			pstmt = con.prepareStatement(SQL);
