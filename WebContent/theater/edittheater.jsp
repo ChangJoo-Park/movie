@@ -1,53 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>±ØÀå µî·Ï</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ê·¹ìž¥ ë“±ë¡</title>
 <script src="assets/scripts/theaterform.js"></script>
 </head>
 <body>
 <%@ page import="java.util.ArrayList, theater.*" %>
 <%
-	request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("UTF-8");
 	String	theater_name	=	"";
 	String  address     =   "";
 	
-	String	headline = "µî·Ï";
+	String	headline = "ë“±ë¡";
 
 	String theater_id= request.getParameter("theater_id");
 	
 	if (theater_id != null){
-		// µî·ÏÀÌ ¾Æ´Ñ °æ¿ì Ãâ·ÂÀ» À§ÇØ °¢ ÇÊµå ³»¿ëÀ» ÀúÀå
+		// ë“±ë¡ì´ ì•„ë‹Œ ê²½ìš° ì¶œë ¥ì„ ìœ„í•´ ê° í•„ë“œ ë‚´ìš©ì„ ì €ìž¥
 		int idnum = Integer.parseInt(theater_id);
 		TheaterDatabase theaterdb = new TheaterDatabase();
 		TheaterEntity theater = theaterdb.getTheater(idnum);
 		theater_name = theater.getTheater_name();
 		address=theater.getAddress();
 		
-		headline = "¼öÁ¤ »èÁ¦";	
+		headline = "ìˆ˜ì • ì‚­ì œ";	
 	};
 %>
-<h2> ±ØÀå <%= headline %> ÇÁ·Î±×·¥ </h2>
+<h2> ê·¹ìž¥ <%= headline %> í”„ë¡œê·¸ëž¨ </h2>
 <form name=theaterform method=post action="processtheater.jsp">
-<!-- menu : µî·Ï, ¼öÁ¤ ¶Ç´Â »èÁ¦ ±¸ºÐÀ» À§ÇÑ ¸Å°³º¯¼ö·Î ÀÌ¿ë -->
+<!-- menu : ë“±ë¡, ìˆ˜ì • ë˜ëŠ” ì‚­ì œ êµ¬ë¶„ì„ ìœ„í•œ ë§¤ê°œë³€ìˆ˜ë¡œ ì´ìš© -->
 <input type=hidden name="menu" value="insert">
-<!-- ¼öÁ¤, »èÁ¦¸¦ À§ÇÑ parameter Àü¼Û -->
+<!-- ìˆ˜ì •, ì‚­ì œë¥¼ ìœ„í•œ parameter ì „ì†¡ -->
 <input type=hidden name="id" value="<%= theater_id %>">
 <table border="1">
 <tr>
-<td align="center">ÀÌ¸§ : <input type=text name=theater_name value="<%= theater_name %>"></td>
-<td align="center">ÁÖ¼Ò : <input type=text name=address value="<%= address %>"/></td>
+<td align="center">ì´ë¦„ : <input type=text name=theater_name value="<%= theater_name %>"></td>
+<td align="center">ì£¼ì†Œ : <input type=text name=address value="<%= address %>"/></td>
 
 
 
 </tr>
 </table>
 <% if (theater_id == null){ %>
-	<input type="button" value="µî·Ï" onClick="insertcheck()"><input type="reset">
+	<input type="button" value="ë“±ë¡" onClick="insertcheck()"><input type="reset">
 <%}else{ %>
-	<input type="button" value="¼öÁ¤" onClick="updatecheck()"><input type="button" value="»èÁ¦" onClick="deletecheck()">
+	<input type="button" value="ìˆ˜ì •" onClick="updatecheck()"><input type="button" value="ì‚­ì œ" onClick="deletecheck()">
 <% } %>
-<input type="button" value="¸ñ·Ï" onClick="location.href='listtheaters.jsp'">
+<input type="button" value="ëª©ë¡" onClick="location.href='listtheaters.jsp'">
 
 </form>
 </body>
