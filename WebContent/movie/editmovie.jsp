@@ -5,7 +5,6 @@
 <title>영화 등록</title>
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
-<link rel="stylesheet" href="../assets/css/custom.css">
 <script src="assets/scripts/movieform.js"></script>
 </head>
 <body>
@@ -51,13 +50,17 @@
 <table>
 <tr>
 <td>제목 : <input type=text name=title value="<%= title %>"/></td>
-<td>개봉년도 : <input type=number name=year value="<%= year %>"></td>
+<td>개봉년도 : <input type=text name=year value="<%= year %>"></td>
 <td>시놉시스 : <input type=text name=description value="<%= description %>"></td>
+</tr>
+<tr>
 <td>장르 : <input type=text name=genre value="<%= genre %>"></td>
 <td>공식 홈페이지 주소 : <input type=text name=officialSite value="<%= officialSite %>"></td>
 <td>포스터 : <input type=text name=photo value="<%= photo%>"></td>
-<td>평점 : <input type=number name=rate value="<%= rate %>"></td>
-<td>상영시간 : <input type=number name=play_time value="<%= play_time %>"></td>
+</tr>
+<tr>
+<td>평점 : <input type=text name=rate value="<%= rate %>"></td>
+<td>상영시간 : <input type=text name=play_time value="<%= play_time %>"></td>
 </tr>
 </table>
 <% if (movie_id == null){ %>

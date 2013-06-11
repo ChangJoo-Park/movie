@@ -5,7 +5,6 @@
 <title> 극장 리스트</title>
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
-<link rel="stylesheet" href="../assets/css/custom.css">
 
 </head>
 <body>
@@ -22,7 +21,7 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <hr><p>조회된 극장은 <%= counter  %> 개 입니다.</p><hr>
-<table border=1>
+<table class="table">
 <tr>
 	<th><b>이름</b></th>
 	<th><b>주소</b></th>

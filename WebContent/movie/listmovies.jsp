@@ -5,7 +5,6 @@
 <title>영화 리스트</title>
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
-<link rel="stylesheet" href="../assets/css/custom.css">
 </head>
 <body>
 	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
@@ -21,7 +20,7 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <hr><p class="text-center">조회된 영화는 <%= counter  %> 개 입니다.</p><hr>
-<table border=1>
+<table class="table">
 <thead>
 <tr>
 	<th><b>영화제목</b></th>
@@ -46,7 +45,7 @@ if(counter > 0 ){
 	<td align="center"><%= movie.getYear() %></td>
 	<td align="center"><%= movie.getRate() %></td>
 	<td align="center"><a href="<%= movie.getOfficialSite() %>">공식홈페이지</a></td>
-	<td align="center"><img src="<%= movie.getPhoto() %>"/></td>
+	<td align="center"><img src="<%= movie.getPhoto() %>"height="200" width="300"/></td>
 	<td align="center"><%= movie.getPlay_time() %></td>
 </tr>
 <%
