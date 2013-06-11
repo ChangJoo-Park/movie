@@ -3,12 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title> 극장 리스트</title>
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
+
 </head>
 <body>
 	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
 
 <%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
-<h2>자바 빈즈 TheaterDatabase를 이용한 테이블 THEATER 조회</h2>
+<h2>영화관 목록</h2>
 <jsp:useBean id="theaterdb" class="theater.TheaterDatabase" scope="page"></jsp:useBean>
 <%
 request.setCharacterEncoding("euc-kr");

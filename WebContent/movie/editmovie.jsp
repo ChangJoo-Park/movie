@@ -3,6 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>영화 등록</title>
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
 <script src="assets/scripts/movieform.js"></script>
 </head>
 <body>

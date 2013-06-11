@@ -1,59 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>¿µÈ­ ¸®½ºÆ®</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ì˜í™” ë¦¬ìŠ¤íŠ¸</title>
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
 </head>
 <body>
 	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
 
 <%@ page import="java.util.ArrayList, movie.MovieEntity" %>
-<h2>ÀÚ¹Ù ºóÁî MovieDatabase¸¦ ÀÌ¿ëÇÑ Å×ÀÌºí MOVIE Á¶È¸</h2>
+<h2 class="text-center">ì˜í™” ëª©ë¡</h2>
 <jsp:useBean id="moviedb" class="movie.MovieDatabase" scope="page"></jsp:useBean>
 <%
-request.setCharacterEncoding("euc-kr");
+request.setCharacterEncoding("UTF-8");
 
 ArrayList<MovieEntity>list = moviedb.getMovieList();
 int counter = list.size();
 if(counter > 0 ){
 %>
-<hr><p>Á¶È¸µÈ ¿µÈ­´Â <%= counter  %> °³ ÀÔ´Ï´Ù.</p><hr>
+<hr><p class="text-center">ì¡°íšŒëœ ì˜í™”ëŠ” <%= counter  %> ê°œ ìž…ë‹ˆë‹¤.</p><hr>
 <table border=1>
+<thead>
 <tr>
-	<th><b>¿µÈ­Á¦¸ñ</b></th>
-	<th><b>½Ã³ñ½Ã½º</b></th>
-	<th><b>Àå¸£</b></th>
-	<th><b>°³ºÀ³âµµ</b></th>
-	<th><b>ÆòÁ¡</b></th>
-	<th><b>°ø½ÄÈ¨ÆäÀÌÁö</b></th>
-	<th><b>»çÁø</b></th>
-	<th><b>»ó¿µ½Ã°£</b></th>
+	<th><b>ì˜í™”ì œëª©</b></th>
+	<th><b>ì‹œë†‰ì‹œìŠ¤</b></th>
+	<th><b>ìž¥ë¥´</b></th>
+	<th><b>ê°œë´‰ë…„ë„</b></th>
+	<th><b>í‰ì </b></th>
+	<th><b>ê³µì‹í™ˆíŽ˜ì´ì§€</b></th>
+	<th><b>ì‚¬ì§„</b></th>
+	<th><b>ìƒì˜ì‹œê°„</b></th>
 </tr>
+</thead>
+<tbody>
 <%
 	for(MovieEntity movie : list){
 %>
+
 <tr>
-	<td align="center"><%= movie.getTitle() %><a href="editmovie.jsp?id=<%=movie.getId()%>">¼öÁ¤</a></td>
+	<td align="center"><%= movie.getTitle() %><a class="btn"href="editmovie.jsp?id=<%=movie.getId()%>">ìˆ˜ì •</a></td>
 	<td align="center"><%= movie.getDescription() %></td>
 	<td align="center"><%= movie.getGenre() %></td>
 	<td align="center"><%= movie.getYear() %></td>
 	<td align="center"><%= movie.getRate() %></td>
-	<td align="center"><a href="<%= movie.getOfficialSite() %>">°ø½ÄÈ¨ÆäÀÌÁö</a></td>
+	<td align="center"><a href="<%= movie.getOfficialSite() %>">ê³µì‹í™ˆíŽ˜ì´ì§€</a></td>
 	<td align="center"><img src="<%= movie.getPhoto() %>"/></td>
 	<td align="center"><%= movie.getPlay_time() %></td>
 </tr>
-</table>
 <%
 	}
 	
 }else{
 %>
-	<p>µî·ÏµÈ ¿µÈ­°¡ ÇÏ³ªµµ ¾ø½À´Ï´Ù.</p>
+	<p>ë“±ë¡ëœ ì˜í™”ê°€ í•˜ë‚˜ë„ ì—†ìŠµë‹ˆë‹¤.</p>
 <%
 }
 %>
+</tbody>
+</table>
 <form name=form method=post action=editmovie.jsp>
-	<input type=submit value="¿µÈ­ µî·Ï">
+	<input type=submit value="ì˜í™” ë“±ë¡">
 </form>
 	
 

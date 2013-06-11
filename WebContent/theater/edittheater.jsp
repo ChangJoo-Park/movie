@@ -3,7 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>극장 등록</title>
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
+<link rel="stylesheet" href="../assets/css/custom.css">
 <script src="assets/scripts/theaterform.js"></script>
+
 </head>
 <body>
 <%@ page import="java.util.ArrayList, theater.*" %>
