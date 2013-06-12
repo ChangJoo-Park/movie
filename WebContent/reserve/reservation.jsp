@@ -25,11 +25,10 @@
 	for(String listItem : list){
 		listItem.replaceAll("\n", "");
 		listItem.replaceAll("\r", "");
-		System.out.println(listItem);	
 	}
-	
 	for(int i = 0 ; i<list.size(); i++){
 		out.println(list.get(i)+",");
 	}
+	
 	
 %>

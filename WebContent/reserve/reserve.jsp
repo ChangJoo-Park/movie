@@ -139,12 +139,16 @@
 			data = $.trim(data);
 			var result = data.split(",");
 			var html = '';
+			html += "<table class=table>";
+			html += "<thead><th><td>영화 예매 결과</td></th></thead>";
+			html += "<tbody><tr>";
 			for(var i = 0; i<result.length; i++){
 				// 개행문자 제거
 				result[i].replace('\n','');
 				result[i].replace('\r','');
-				html += "<p>"+result[i]+"</p>";
+				html += "<td>"+result[i]+"</td>";
 			}
+			html += "</tr></tbody></table>";
 			$("#reservation").html(html).slideDown();
 		}// viewData
 		// 영화관 선택 시 관 출력

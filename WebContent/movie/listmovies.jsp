@@ -40,7 +40,7 @@ if(counter > 0 ){
 
 <tr>
 	<td align="center"><%= movie.getTitle() %><a class="btn"href="editmovie.jsp?id=<%=movie.getId()%>">수정</a></td>
-	<td align="center"><%= movie.getDescription() %></td>
+	<td align="center" width="300px"><%= movie.getDescription() %></td>
 	<td align="center"><%= movie.getGenre() %></td>
 	<td align="center"><%= movie.getYear() %></td>
 	<td align="center"><%= movie.getRate() %></td>
