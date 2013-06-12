@@ -1,15 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8" session="true" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
-<link rel="stylesheet" href="../assets/css/custom.css">
-<title>Insert title here</title>
+<title>Reserve Page</title>
 </head>
 <body>
+<%
+	Object LoginID = session.getAttribute("LoginID");
+	if(LoginID == null)
+	{
+		response.sendRedirect("../authentication/login.jsp");
+	}
+	else
+	{
+%>
 	<jsp:include page="../layouts/navigation.jsp"></jsp:include>
 	<%@ page import="java.util.ArrayList, movie.MovieEntity" %>
 	<%@ page import="java.util.ArrayList, theater.TheaterEntity" %>
@@ -25,6 +33,7 @@
 	%>
 	<div id="reservation_before">
 	<!-- DB에서 영화 불러서 리스트로 출력하기 시작 -->
+	<h6><%= session.getAttribute("LoginID") %></h6>
 	<h1 class="text-center">영화 예매</h1>
 	<form method="post" name=reservation action=reservation.jsp accept-charset="UTF-8">
 		<div class="container-row">
@@ -113,6 +122,7 @@
 		</div>
 	</form>
 	</div>
+	<% } %>
 	<div id="reservation"></div>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

@@ -3,6 +3,7 @@ package member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
@@ -13,6 +14,7 @@ public class MemberDatabase {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private DataSource ds = null;
+	private Statement stmt = null;
 	
 	// 등록한 DBCP 데이터소스를 찾아 저장하는 생성자
 	public MemberDatabase(){
@@ -107,6 +109,62 @@ public class MemberDatabase {
 		}
 		return member;
 	}
+	
+	public boolean setLogin(String id, String pw){
+		boolean success = false;		
+		connect();
+		String sql = "";
+		try{
+			stmt = con.createStatement();
+			ResultSet rs = null;
+			
+			sql =	" select * from movie_member ";
+			sql+= 	" where ";
+			sql+= 	" id='"+ id +"' ";
+			sql+= 	" and password='"+ pw+"' ";			
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()){
+				success = true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			disconnect();
+		}
+		
+		return success;
+	}
+	
+	public boolean checkID(String id){
+		boolean success = false;
+		connect();
+		String sql = "";
+		try{
+			stmt = con.createStatement();
+			ResultSet rs = null;
+			
+			sql =	" select * from movie_member ";
+			sql+= 	" where ";
+			sql+= 	" id='"+ id +"' ";
+			
+			rs = stmt.executeQuery(sql);
+			
+			if(rs.next()){
+				success = true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			disconnect();
+		}
+		
+		return success;		
+	}
+	
 	public boolean insertDB(MemberEntity member){
 		boolean success = false;
 		System.out.println(member.getId());

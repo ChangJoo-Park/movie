@@ -32,7 +32,7 @@
 <%			
 			memberdb.updateDB(member);
 		}
-		response.sendRedirect("listmembers.jsp");	
+		response.sendRedirect("../movie/listmovies.jsp");	
 	}else if(menu.equals("insert")){
 %>
 	<jsp:setProperty property="id" name="member"/>
@@ -44,7 +44,7 @@
 	
 <%
 		memberdb.insertDB(member);
-		response.sendRedirect("listmembers.jsp");
+		response.sendRedirect("../movie/listmovies.jsp");
 	}
 	
 %>

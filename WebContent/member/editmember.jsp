@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
 <title>회원 등록</title>
 <script src="assets/scripts/memberform.js"></script>
 </head>

@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min-responsive.css">
 <title>회원 리스트</title>
 </head>
 <body>
@@ -18,7 +20,8 @@ int counter = list.size();
 if(counter > 0 ){
 %>
 <hr><p>조회된 회원은 <%= counter  %> 개 입니다.</p><hr>
-<table>
+<table class="table">
+<thead>
 <tr>
 	<th><b>id</b></th>
 	<th><b>password</b></th>
@@ -27,18 +30,19 @@ if(counter > 0 ){
 	<th><b>address</b></th>
 	<th><b>favorite_theater</b></th>
 </tr>
+</thead>
+<tbody>
 <%
 	for(MemberEntity member : list){
 %>
 <tr>
-	<td><%= member.getId() %><a href="editmember.jsp?id=<%=member.getId()%>">수정</a></td>
+	<td><%= member.getId() %><a class="btn" href="editmember.jsp?id=<%=member.getId()%>">수정</a></td>
 	<td><%= member.getPassword() %></td>
 	<td><%= member.getMail() %></td>
 	<td><%= member.getName() %></td>
 	<td><%= member.getAddress() %></td>
 	<td><%= member.getFavorite_theater() %></td>	
 </tr>
-</table>
 <%
 	}
 	
@@ -48,6 +52,8 @@ if(counter > 0 ){
 <%
 }
 %>
+</tbody>
+</table>
 <form name=form method=post action=editmember.jsp>
 	<input type=submit value="회원 등록">
 </form>
